@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--多状态视图-->
+    <declare-styleable name="MultiStateView">
+        <attr name="msv_loadingView" format="reference" />
+        <attr name="msv_emptyView" format="reference" />
+        <attr name="msv_errorView" format="reference" />
+        <attr name="msv_viewState" format="enum">
+            <enum name="content" value="0" />
+            <enum name="error" value="1" />
+            <enum name="empty" value="2" />
+            <enum name="loading" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RippleView">
+        <attr name="rv_alpha" format="integer" />
+        <attr name="rv_framerate" format="integer" />
+        <attr name="rv_rippleDuration" format="integer" />
+        <attr name="rv_zoomDuration" format="integer" />
+        <attr name="rv_color" format="color" />
+        <attr name="rv_centered" format="boolean" />
+        <attr name="rv_type" format="enum">
+            <enum name="simpleRipple" value="0" />
+            <enum name="doubleRipple" value="1" />
+            <enum name="rectangle" value="2" />
+        </attr>
+        <attr name="rv_ripplePadding" format="dimension" />
+        <attr name="rv_zoom" format="boolean" />
+        <attr name="rv_zoomScale" format="float" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="CircleProgressBarView">
+        <attr name="backgroundColor" format="color" /><!--背景颜色-->
+        <attr name="progressBarColor" format="color" /><!--进度条颜色-->
+        <attr name="progressBarBackgroundColor" format="color" /><!--进度条背景颜色-->
+        <attr name="progressBarWidth" format="dimension" /><!--色带宽度-->
+        <attr name="progressValue" format="integer" /><!--百分比 最大值为100-->
+        <attr name="isShowAnimation" format="boolean" /><!--是否需要动画-->
+        <attr name="isAutoAnimation" format="boolean" /><!--是否需要自动启动动画-->
+        <attr name="animationTime" format="integer" /><!--动画时间-->
+        <attr name="textSize" format="dimension" /><!--百分比文本大小-->
+        <attr name="textColor" format="color" /><!--百分比文本颜色-->
+        <attr name="isShowText" format="boolean" /><!--是否显示文本-->
+        <attr name="isFanShaped" format="boolean" /><!--是否为扇形-->
+    </declare-styleable>
+</resources>
