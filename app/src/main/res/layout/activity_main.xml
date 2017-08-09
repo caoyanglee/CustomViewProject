@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="io.weimu.www.MainActivity">
 
-    <io.weimu.www.widget.StockChartAView
-        android:id="@+id/stockView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp" />
-</LinearLayout>
+    <!--<io.weimu.www.widget.StockChartAView-->
+    <!--android:id="@+id/stockView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="16dp" />-->
+
+    <io.weimu.www.widget.WaveView
+        android:id="@+id/wave"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_centerInParent="true" />
+
+    <!--<io.weimu.www.widget.IndexChart-->
+    <!--android:layout_width="200dp"-->
+    <!--android:layout_height="200dp"-->
+    <!--android:layout_centerInParent="true" />-->
+    <!--<io.weimu.www.widget.GradientProgressBar-->
+    <!--android:layout_width="200dp"-->
+    <!--android:layout_height="200dp" />-->
+    <!--<io.weimu.www.widget.FanBar-->
+    <!--android:layout_width="175dp"-->
+    <!--android:layout_height="175dp"-->
+    <!--android:layout_centerInParent="true" />-->
+</RelativeLayout>

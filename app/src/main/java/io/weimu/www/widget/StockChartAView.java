@@ -25,10 +25,10 @@ import io.weimu.www.bean.LineData;
  */
 
 public class StockChartAView extends View {
-    private final static int FRACTION = 240;//份数
-    private final static int FRACTION_GAP = 8;//划分4大份
-    private final static int LINE_HEIGHT_GAP = 8;//折线图 高度划分4份
-    private final static int BAR_HEIGHT_GAP = 4;//柱状图 高度划分2份
+    private final static int FRACTION = 30;//份数
+    private final static int FRACTION_GAP = 4;//划分4大份
+    private final static int LINE_HEIGHT_GAP = 4;//折线图 高度划分4份
+    private final static int BAR_HEIGHT_GAP = 2;//柱状图 高度划分2份
 
 
     private List<LineData> lineDatas;
@@ -44,12 +44,17 @@ public class StockChartAView extends View {
     private Paint highLightBackP;//高亮背景【黑】
     private Paint highTextP;//高亮文字【白】
 
+    private Paint bottomTextP;//底部文字
+    private Paint leftTextP;//左侧文字
+
     //折线图底部Y  柱状图的顶部Y
     private float lineCharEndY;
+
     private float barCharStartY;
+    private float barChartEndY;
 
     //整个视图的高度因子
-    private float heightFactor = 0;//顶部3份，底部1份,中间32dp
+    private float heightFactor = 0;//顶部3份，底部1份,中间32dp  底部文字18dp
     private float widthFactor = 0;//9:30~15:00共240份  第一份60 第二份60 60 第四份60
 
 
@@ -68,8 +73,10 @@ public class StockChartAView extends View {
     private RectF rectLeftRight;
     private RectF rectBottom;
 
+
+
     //自定义属性
-    private float barViewGap = 0.5f;//柱状图与柱状图之间的距离
+    private float barViewGap = 1f;//柱状图与柱状图之间的距离
 
 
     public StockChartAView(Context context) {
@@ -123,15 +130,27 @@ public class StockChartAView extends View {
         highTextP = new Paint(Paint.ANTI_ALIAS_FLAG);
         initNormalPaint(highTextP);
         highTextP.setColor(Color.WHITE);
-        highTextP.setTextSize(26f);
+        highTextP.setTextSize(dip2px(10));
         highTextP.setTextAlign(Paint.Align.CENTER);
+
+        //bottom text
+        bottomTextP = new Paint();
+        initNormalPaint(bottomTextP);
+        bottomTextP.setTextAlign(Paint.Align.LEFT);
+        bottomTextP.setTextSize(dip2px(14));
+
+       //left text
+        leftTextP = new Paint();
+        initNormalPaint(leftTextP);
+        leftTextP.setTextAlign(Paint.Align.LEFT);
+        leftTextP.setTextSize(dip2px(14));
     }
 
 
     private void initNormalPaint(Paint paint) {
         paint.setStrokeWidth(2);
         paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
     }
 
@@ -143,11 +162,15 @@ public class StockChartAView extends View {
 
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        heightFactor = ((heightSize - dip2px(40)) / 4f);
+
+
+        heightFactor = ((heightSize - dip2px(40) - dip2px(18)) / 4f);
         widthFactor = widthSize / (float) FRACTION;
 
         lineCharEndY = heightFactor * 3;
-        barCharStartY = getHeight() - heightFactor;
+        barChartEndY = getHeight() - dip2px(18);
+        barCharStartY = barChartEndY - heightFactor;
+
     }
 
 
@@ -160,8 +183,13 @@ public class StockChartAView extends View {
         drawLineChart(canvas, lineAverageDatas, lineAverageP);
         drawBarChart(canvas);
         drawHighLight(canvas);
+        drawLineChartLeftText(canvas);
+        drawBarChartBottomText(canvas);
 
     }
+
+
+
 
     private void drawBorder(Canvas canvas) {
         //border-line chart
@@ -171,9 +199,9 @@ public class StockChartAView extends View {
         canvas.drawLine(getWidth(), 0, getWidth(), lineCharEndY, borderP);
         //border-bar chart
         canvas.drawLine(0, barCharStartY, getWidth(), barCharStartY, borderP);
-        canvas.drawLine(0, getHeight(), getWidth(), getHeight(), borderP);
-        canvas.drawLine(0, getHeight(), 0, barCharStartY, borderP);
-        canvas.drawLine(getWidth(), getHeight(), getWidth(), barCharStartY, borderP);
+        canvas.drawLine(0, barChartEndY, getWidth(), barChartEndY, borderP);
+        canvas.drawLine(0, barChartEndY, 0, barCharStartY, borderP);
+        canvas.drawLine(getWidth(), barChartEndY, getWidth(), barCharStartY, borderP);
     }
 
 
@@ -183,7 +211,7 @@ public class StockChartAView extends View {
             //lineChart
             canvas.drawLine(widthFactor * FRACTION / FRACTION_GAP * (i + 1), 0, widthFactor * FRACTION / FRACTION_GAP * (i + 1), lineCharEndY, gridP);
             //barChart
-            canvas.drawLine(widthFactor * FRACTION / FRACTION_GAP * (i + 1), barCharStartY, widthFactor * FRACTION / FRACTION_GAP * (i + 1), getHeight(), gridP);
+            canvas.drawLine(widthFactor * FRACTION / FRACTION_GAP * (i + 1), barCharStartY, widthFactor * FRACTION / FRACTION_GAP * (i + 1), barChartEndY, gridP);
         }
         //grid-horizontal
         float lineChartHeightFactor = lineCharEndY / LINE_HEIGHT_GAP;//divide into multiply fraction
@@ -222,9 +250,13 @@ public class StockChartAView extends View {
             barHeightFactor = (float) (heightFactor / barDiff);
             for (int i = 1; i <= barDatas.size(); i++) {
                 float x = widthFactor * (i - 1) + widthFactor / 2;
-                float y = (float) (getHeight() - (barDatas.get(i - 1).getValueY() * barHeightFactor));
-
-                canvas.drawRect(x - widthFactor / 2 + barViewGap, y, x + widthFactor / 2 - barViewGap, getHeight(), barP);
+                float y = (float) (barChartEndY - (barDatas.get(i - 1).getValueY() * barHeightFactor));
+                if (i%2==0){
+                    barP.setColor(Color.rgb(13, 103, 14));
+                }else{
+                    barP.setColor(Color.RED);
+                }
+                canvas.drawRect(x - widthFactor / 2 + barViewGap, y, x + widthFactor / 2 - barViewGap, barChartEndY, barP);
             }
         }
     }
@@ -246,7 +278,7 @@ public class StockChartAView extends View {
                 canvas.drawLine(0, y, getWidth(), y, highLightP);
                 //vertical
                 canvas.drawLine(x, 0, x, lineCharEndY, highLightP);
-                canvas.drawLine(x, barCharStartY, x, getHeight(), highLightP);
+                canvas.drawLine(x, barCharStartY, x, barChartEndY, highLightP);
 
                 String lineValue = lineDatas.get(cell - 1).getValueY() + "";
                 String cellValue = lineDatas.get(cell - 1).getTimeX() + "";
@@ -281,9 +313,9 @@ public class StockChartAView extends View {
 
                 //底部文字高亮
                 rectBottom.left = x - 50;
-                rectBottom.top = getHeight() - 50;
+                rectBottom.top = barChartEndY - 50;
                 rectBottom.right = x + 50;
-                rectBottom.bottom = getHeight();
+                rectBottom.bottom = barChartEndY;
 
                 canvas.drawRect(rectBottom, highLightBackP);
 
@@ -294,6 +326,24 @@ public class StockChartAView extends View {
 
 
         }
+    }
+
+    private void drawBarChartBottomText(Canvas canvas) {
+        bottomTextP.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("09:30", 0, getHeight() - dip2px(2), bottomTextP);
+        bottomTextP.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("11:30", getWidth() / 2, getHeight() - dip2px(2), bottomTextP);
+        bottomTextP.setTextAlign(Paint.Align.RIGHT);
+        canvas.drawText("15:00", getWidth(), getHeight() - dip2px(2), bottomTextP);
+    }
+
+    private void drawLineChartLeftText(Canvas canvas) {
+        LineData max = Collections.max(lineDatas);
+        LineData min = Collections.min(lineDatas);
+
+        canvas.drawText(max.getValueY()+"",dip2px(2),dip2px(14),leftTextP);
+        canvas.drawText(max.getValueY()/2+"",dip2px(2),lineCharEndY/2+dip2px(4),leftTextP);
+        canvas.drawText(min.getValueY()+"",dip2px(2),lineCharEndY-dip2px(4),leftTextP);
     }
 
 

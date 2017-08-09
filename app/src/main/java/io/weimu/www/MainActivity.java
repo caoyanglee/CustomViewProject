@@ -10,6 +10,7 @@ import java.util.Random;
 import io.weimu.www.bean.BarData;
 import io.weimu.www.bean.LineData;
 import io.weimu.www.widget.StockChartAView;
+import io.weimu.www.widget.WaveView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,25 +18,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StockChartAView stockChartAView = (StockChartAView) findViewById(R.id.stockView);
-        List<LineData> lineDatas = new ArrayList<>();
-        for (int i=0;i<240;i++){
-            lineDatas.add(new LineData(i, i*i));
-        }
-        stockChartAView.setLineDatas(lineDatas);
-
-
-        List<LineData> lineAverageDatas = new ArrayList<>();
-        for (int i=0;i<240;i++){
-            lineAverageDatas.add(new LineData(i, 3*i*i));
-        }
-        stockChartAView.setLineAverageDatas(lineAverageDatas);
-
-
-        List<BarData> barDatas = new ArrayList<>();
-        for (int i=0;i<240;i++){
-            barDatas.add(new BarData(i, (2+i)*i));
-        }
-        stockChartAView.setBarDatas(barDatas);
+        WaveView wave = (WaveView) findViewById(R.id.wave);
+        wave.setCurrentProgress(80);
+//        StockChartAView stockChartAView = (StockChartAView) findViewById(R.id.stockView);
+//        List<LineData> lineDatas = new ArrayList<>();
+//        for (int i=0;i<30;i++){
+//            lineDatas.add(new LineData(i, i*i));
+//        }
+//        stockChartAView.setLineDatas(lineDatas);
+//
+//
+//        List<LineData> lineAverageDatas = new ArrayList<>();
+//        for (int i=0;i<30;i++){
+//            lineAverageDatas.add(new LineData(i, 7*i));
+//        }
+//        stockChartAView.setLineAverageDatas(lineAverageDatas);
+//
+//
+//        List<BarData> barDatas = new ArrayList<>();
+//        for (int i=0;i<30;i++){
+//            barDatas.add(new BarData(i, i));
+//        }
+//        stockChartAView.setBarDatas(barDatas);
     }
 }

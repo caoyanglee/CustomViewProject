@@ -71,7 +71,7 @@ public class GradientProgressBar extends View {
         textPaint.setTextSize(textSize);
         textPaint.setColor(Color.BLACK);
 
-        setBackgroundColor(Color.GREEN);
+//        setBackgroundColor(Color.GREEN);
     }
 
 
@@ -115,14 +115,6 @@ public class GradientProgressBar extends View {
         paint.setAntiAlias(true);
         paint.setStrokeWidth(10);
 
-        canvas.drawPoint(circlePadding * 2,circlePadding * 2,paint);
-        canvas.drawPoint(getMeasuredWidth() - circlePadding * 2,circlePadding * 2,paint);
-        canvas.drawPoint(getMeasuredWidth() - circlePadding * 2,getMeasuredHeight() - circlePadding * 2,paint);
-        canvas.drawPoint(circlePadding * 2,getMeasuredHeight() - circlePadding * 2,paint);
-
-
-        canvas.drawLine(0,0,getMeasuredWidth(),0,paint);
-
 
         //2.绘制颜色渐变圆环
         gradientCirclePaint.setShader(gradientShader);
@@ -138,7 +130,6 @@ public class GradientProgressBar extends View {
         //X轴中点坐标
         int centerX = getMeasuredWidth() / 2;
 
-        canvas.drawPoint(centerX,centerX,paint);
 
         //3.绘制100份线段，切分空心圆弧
         for (float i = 0; i < 360; i += 3.6) {
@@ -160,9 +151,6 @@ public class GradientProgressBar extends View {
         int textHeight = (int) (Math.ceil(textPaint.getFontMetrics().descent - textPaint.getFontMetrics().ascent) + 2);
         canvas.drawText(percent + "%", centerX - textWidth / 2, centerX + textHeight / 4, textPaint);
 
-
-        canvas.drawLine(circlePadding * 2,circlePadding * 2,getMeasuredWidth() - circlePadding * 2,circlePadding * 2,paint);
-        canvas.drawLine(getMeasuredWidth() - circlePadding * 2,circlePadding * 2,getMeasuredWidth() - circlePadding * 2,getMeasuredHeight() - circlePadding * 2,paint);
     }
 
     /**
