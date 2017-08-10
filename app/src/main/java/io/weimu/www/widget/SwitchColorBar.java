@@ -56,7 +56,7 @@ public class SwitchColorBar extends View {
     private float endAngle = 417;//经过计算得出
     private float angleFactor = (endAngle - startAngle) / FRACTION;
 
-    private float currentAngle = 360;
+    private float currentAngle = 123;
 
     private int middleCircleRadius = 0;
 
