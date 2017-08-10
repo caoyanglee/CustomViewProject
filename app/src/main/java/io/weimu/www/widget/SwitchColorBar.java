@@ -1,7 +1,6 @@
 package io.weimu.www.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -127,7 +126,7 @@ public class SwitchColorBar extends View {
         DesRect = new Rect(0, 0, widthSize, heightSize);
 
         switchSrcRect = new Rect(0, 0, widthSize - dip2px(30), heightSize - dip2px(30));
-        switchDesRect = new Rect(0 + dip2px(30), 0 + dip2px(30), widthSize - dip2px(30), heightSize - dip2px(30));
+        switchDesRect = new Rect(dip2px(30), dip2px(30), widthSize - dip2px(30), heightSize - dip2px(30));
 
 
         middleCircleRadius = widthSize / 2 - dip2px(15);
@@ -186,10 +185,10 @@ public class SwitchColorBar extends View {
         if (currentAngle < 0) {
             currentAngle += 360;
         }
+//        Log.e("weimu","currentAngel="+currentAngle);
         if (currentAngle > 0 && currentAngle < 180-startAngle) {
             currentAngle += 360;
         }
-        Log.e("weimu", "currentAngle=" + currentAngle);
         if (currentAngle >= startAngle && currentAngle <= endAngle) {
             this.currentAngle = currentAngle;
             postInvalidate();
