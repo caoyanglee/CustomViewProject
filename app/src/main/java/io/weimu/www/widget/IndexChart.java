@@ -171,7 +171,7 @@ public class IndexChart extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         widthSize = MeasureSpec.getSize(widthMeasureSpec);
         heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        setMeasuredDimension(Math.max(widthSize, heightSize), Math.min(widthSize, heightSize));
+        setMeasuredDimension(Math.min(widthSize, heightSize), Math.min(widthSize, heightSize));
         Log.e("weimu", "onMeasure");
     }
 
@@ -180,7 +180,7 @@ public class IndexChart extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         widthSize = w;
         heightSize = h;
-        setMeasuredDimension(Math.max(widthSize, heightSize), Math.min(widthSize, heightSize));
+        setMeasuredDimension(Math.min(widthSize, heightSize), Math.min(widthSize, heightSize));
         mShader = new LinearGradient(0, 0, widthSize, heightSize, new int[]{gradientA, gradientB, gradientC, gradientD}, null, Shader.TileMode.MIRROR);
 
         colorBarOuterRadius = widthSize / 2 - dip2px(padding) - dip2px(indexBarColorBarSpace);

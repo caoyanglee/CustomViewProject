@@ -16,7 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SwitchColorBarActivity"></activity>
+        <activity android:name=".ui.SwitchColorBarActivity" />
+        <activity android:name=".ui.StockChartActivity" />
+        <activity android:name=".ui.WaveActivity" />
+        <activity android:name=".ui.FanbarActivity" />
+        <activity android:name=".ui.IndexChartActivity" />
+        <activity android:name=".ui.CircleProgressBarActivity" />
+        <activity android:name=".ui.TextViewWithBorderActivity"></activity>
     </application>
 
 </manifest>

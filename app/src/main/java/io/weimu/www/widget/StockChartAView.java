@@ -84,7 +84,7 @@ public class StockChartAView extends View {
     }
 
     public StockChartAView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, -1);
+        this(context, attrs, 0);
     }
 
     public StockChartAView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

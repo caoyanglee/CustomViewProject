@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--recyclerView中建议使isAutoAnimation属性为false，手动控制开始动画-->
+            <io.weimu.www.widget.CircleProgressBarView
+                android:id="@+id/crv_01"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginTop="8dp"
+                app:backgroundColor="#ffffff"
+                app:animationTime="2000"
+                app:isShowAnimation="true"
+                app:isShowText="true"
+                app:isAutoAnimation="false"
+                app:progressBarBackgroundColor="#f6f6f6"
+                app:progressBarColor="#2599ea"
+                app:progressBarWidth="45dp"
+                app:progressValue="95"
+                app:textColor="#2599ea"
+                app:textSize="16sp" />
+
+            <io.weimu.www.widget.CircleProgressBarView
+                android:id="@+id/crv_02"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                app:isAutoAnimation="true"
+                app:isFanShaped="true"
+                android:layout_marginTop="8dp"
+                app:backgroundColor="#2599ea"
+                app:progressBarColor="@color/green_status"
+                app:progressBarWidth="5dp"
+                app:progressValue="30" />
+
+            <io.weimu.www.widget.CircleProgressBarView
+                android:id="@+id/crv_03"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginTop="8dp"
+                app:progressBarColor="@color/tribe_manager"
+                app:progressBarWidth="5dp"
+                app:progressValue="50" />
+
+            <io.weimu.www.widget.CircleProgressBarView
+                android:id="@+id/crv_04"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginTop="8dp"
+                app:progressBarColor="@color/delivery_yellow"
+                app:progressBarWidth="5dp"
+                app:progressValue="70" />
+
+            <io.weimu.www.widget.CircleProgressBarView
+                android:id="@+id/crv_05"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginTop="8dp"
+                app:progressBarColor="@color/tribe_host"
+                app:progressBarWidth="5dp"
+                app:progressValue="90" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

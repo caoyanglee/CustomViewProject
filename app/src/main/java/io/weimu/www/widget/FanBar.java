@@ -53,7 +53,7 @@ public class FanBar extends View {
     private float touchY;
 
 
-    private int chooseItem = -1;
+    private int chooseItem = 0;
 
     public FanBar(Context context) {
         super(context);
