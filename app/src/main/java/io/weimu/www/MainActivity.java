@@ -2,6 +2,7 @@ package io.weimu.www;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Random;
 import io.weimu.www.bean.BarData;
 import io.weimu.www.bean.LineData;
 import io.weimu.www.widget.StockChartAView;
+import io.weimu.www.widget.SwitchColorBar;
 import io.weimu.www.widget.WaveView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +20,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SwitchColorBar sw = (SwitchColorBar) findViewById(R.id.switchBar);
+        final TextView tv = (TextView) findViewById(R.id.tv);
+        sw.setValueChangeListener(new SwitchColorBar.ValueChangeListener() {
+            @Override
+            public void onValeChange(int value) {
+                tv.setText("金额"+value+"万元");
+            }
+        });
 
 //        WaveView wave = (WaveView) findViewById(R.id.wave);
 //        wave.setCurrentProgress(80);

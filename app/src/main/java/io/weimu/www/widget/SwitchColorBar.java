@@ -26,19 +26,19 @@ import io.weimu.www.R;
  */
 
 public class SwitchColorBar extends View {
+    private final static int FRACTION = 10;//刻度尺分10份
+
     private int widthSize;
     private int heightSize;
 
 
-    private Paint lineP;
     private Paint showBarP;
+    private Paint textP;
 
 
     private RectF viewRect;
 
     private Rect SrcRect, DesRect;//前景,背景
-    private Rect switchSrcRect, switchDesRect;
-
 
     private Bitmap circleGreyBitmap;
     private Bitmap colorBarBitmap;
@@ -52,15 +52,16 @@ public class SwitchColorBar extends View {
     private PorterDuffXfermode mixMode;
 
 
-    private float startAngle = 123;
-    private float endAngle = 417;
+    private float startAngle = 123;//经过计算得出
+    private float endAngle = 417;//经过计算得出
+    private float angleFactor = (endAngle - startAngle) / FRACTION;
 
     private float currentAngle = 360;
 
     private int middleCircleRadius = 0;
 
 
-    Matrix matrix = new Matrix();
+    private Matrix matrix = new Matrix();
 
     public SwitchColorBar(Context context) {
         this(context, null);
@@ -80,17 +81,19 @@ public class SwitchColorBar extends View {
     private void init() {
         setClickable(true);
 
-        lineP = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
-        lineP.setColor(Color.RED);
-        lineP.setStrokeWidth(dip2px(3));
-        lineP.setStyle(Paint.Style.STROKE);
-        lineP.setAntiAlias(true);
-
         showBarP = new Paint();
         showBarP.setColor(Color.RED);
         showBarP.setStrokeWidth(dip2px(30));
         showBarP.setStyle(Paint.Style.FILL);
         showBarP.setAntiAlias(true);
+
+        textP = new Paint();
+        textP.setColor(Color.rgb(160, 160, 160));
+        textP.setAntiAlias(true);
+        textP.setStyle(Paint.Style.FILL);
+        textP.setTextSize(sp2px(16));
+        textP.setTextAlign(Paint.Align.CENTER);
+        textP.setAntiAlias(true);
 
 
         mixMode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
@@ -125,10 +128,6 @@ public class SwitchColorBar extends View {
         SrcRect = new Rect(0, 0, widthSize, heightSize);
         DesRect = new Rect(0, 0, widthSize, heightSize);
 
-        switchSrcRect = new Rect(0, 0, widthSize - dip2px(30), heightSize - dip2px(30));
-        switchDesRect = new Rect(dip2px(30), dip2px(30), widthSize - dip2px(30), heightSize - dip2px(30));
-
-
         middleCircleRadius = widthSize / 2 - dip2px(15);
     }
 
@@ -137,26 +136,32 @@ public class SwitchColorBar extends View {
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(circleGreyBitmap, SrcRect, DesRect, null);
         //save as new layer
-        int sc = canvas.saveLayer(viewRect, lineP, Canvas.ALL_SAVE_FLAG);
-
+        int sc = canvas.saveLayer(viewRect, showBarP, Canvas.ALL_SAVE_FLAG);
+        //color bar
         canvas.drawArc(viewRect, startAngle, currentAngle - startAngle, true, showBarP);
+        //color bar's front point
         canvas.drawCircle(widthSize / 2 + (float) (Math.cos((currentAngle) * degreeUnit) * middleCircleRadius), heightSize / 2 + (float) (Math.sin((currentAngle) * degreeUnit) * middleCircleRadius), dip2px(15), showBarP);
         //再画圆之后 设置mode
         showBarP.setXfermode(mixMode);
-
         canvas.drawBitmap(colorBarBitmap, 0, 0, showBarP);
-
         //restore to canvas
-
         showBarP.setXfermode(null);
         canvas.restoreToCount(sc);
 
+        //center circle bar
         matrix.postTranslate(-switchBitmp.getWidth() / 2, -switchBitmp.getHeight() / 2);//步骤1
-        matrix.postRotate(-(270-startAngle) + (currentAngle - startAngle));///步骤2
+        matrix.postRotate(-(270 - startAngle) + (currentAngle - startAngle));///步骤2
         matrix.postTranslate(switchBitmp.getWidth() / 2, switchBitmp.getHeight() / 2);//步骤1
         matrix.postTranslate(dip2px(28), dip2px(28));
         canvas.drawBitmap(switchBitmp, matrix, null);//步骤4
         matrix.reset();
+
+        //text
+
+        canvas.drawText("10万", widthSize / 2 + (float) (Math.cos((startAngle) * degreeUnit) * widthSize / 2) - dip2px(24), heightSize / 2 + (float) (Math.sin((startAngle) * degreeUnit) * widthSize / 2) + dip2px(10), textP);
+        canvas.drawText("100万", widthSize / 2 + (float) (Math.cos((endAngle) * degreeUnit) * widthSize / 2) + dip2px(24), heightSize / 2 + (float) (Math.sin((endAngle) * degreeUnit) * widthSize / 2) + dip2px(10), textP);
+
+
     }
 
     @Override
@@ -186,14 +191,17 @@ public class SwitchColorBar extends View {
             currentAngle += 360;
         }
 //        Log.e("weimu","currentAngel="+currentAngle);
-        if (currentAngle > 0 && currentAngle < 180-startAngle) {
+        if (currentAngle > 0 && currentAngle < 180 - startAngle) {
             currentAngle += 360;
         }
         if (currentAngle >= startAngle && currentAngle <= endAngle) {
             this.currentAngle = currentAngle;
+            float angleDiff = currentAngle - startAngle;
+            float index = angleDiff / angleFactor;
+            if (valueChangeListener!=null)
+                valueChangeListener.onValeChange(Double.valueOf(Math.ceil(index) * 10).intValue());
             postInvalidate();
         }
-
     }
 
 
@@ -207,5 +215,16 @@ public class SwitchColorBar extends View {
     public int sp2px(float spValue) {
         final float fontScale = getContext().getResources().getDisplayMetrics().density;
         return (int) (spValue * fontScale + 0.5f);
+    }
+
+
+    private ValueChangeListener valueChangeListener;
+
+    public interface ValueChangeListener {
+        void onValeChange(int value);
+    }
+
+    public void setValueChangeListener(ValueChangeListener valueChangeListener) {
+        this.valueChangeListener = valueChangeListener;
     }
 }

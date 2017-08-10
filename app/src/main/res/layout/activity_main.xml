@@ -29,8 +29,20 @@
     <!--android:layout_width="175dp"-->
     <!--android:layout_height="175dp"-->
     <!--android:layout_centerInParent="true" />-->
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="10万"
+        android:textColor="#F75F4E"
+        android:textSize="32sp" />
+
     <io.weimu.www.widget.SwitchColorBar
+        android:id="@+id/switchBar"
         android:layout_width="250dp"
-        android:layout_centerInParent="true"
-        android:layout_height="250dp" />
+        android:layout_height="250dp"
+        android:layout_centerInParent="true" />
 </RelativeLayout>
