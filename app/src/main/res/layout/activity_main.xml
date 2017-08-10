@@ -12,11 +12,11 @@
     <!--android:layout_height="match_parent"-->
     <!--android:layout_margin="16dp" />-->
 
-    <io.weimu.www.widget.WaveView
-        android:id="@+id/wave"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_centerInParent="true" />
+    <!--<io.weimu.www.widget.WaveView-->
+    <!--android:id="@+id/wave"-->
+    <!--android:layout_width="170dp"-->
+    <!--android:layout_height="170dp"-->
+    <!--android:layout_centerInParent="true" />-->
 
     <!--<io.weimu.www.widget.IndexChart-->
     <!--android:layout_width="200dp"-->
@@ -29,4 +29,8 @@
     <!--android:layout_width="175dp"-->
     <!--android:layout_height="175dp"-->
     <!--android:layout_centerInParent="true" />-->
+    <io.weimu.www.widget.SwitchColorBar
+        android:layout_width="250dp"
+        android:layout_centerInParent="true"
+        android:layout_height="250dp" />
 </RelativeLayout>

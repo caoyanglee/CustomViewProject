@@ -18,8 +18,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        WaveView wave = (WaveView) findViewById(R.id.wave);
-        wave.setCurrentProgress(80);
+
+//        WaveView wave = (WaveView) findViewById(R.id.wave);
+//        wave.setCurrentProgress(80);
+
 //        StockChartAView stockChartAView = (StockChartAView) findViewById(R.id.stockView);
 //        List<LineData> lineDatas = new ArrayList<>();
 //        for (int i=0;i<30;i++){
@@ -40,5 +42,7 @@ public class MainActivity extends AppCompatActivity {
 //            barDatas.add(new BarData(i, i));
 //        }
 //        stockChartAView.setBarDatas(barDatas);
+
+
     }
 }
