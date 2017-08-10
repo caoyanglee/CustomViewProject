@@ -21,14 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SwitchColorBar sw = (SwitchColorBar) findViewById(R.id.switchBar);
-        final TextView tv = (TextView) findViewById(R.id.tv);
-        sw.setValueChangeListener(new SwitchColorBar.ValueChangeListener() {
-            @Override
-            public void onValeChange(int value) {
-                tv.setText("金额"+value+"万元");
-            }
-        });
+
 
 //        WaveView wave = (WaveView) findViewById(R.id.wave);
 //        wave.setCurrentProgress(80);
