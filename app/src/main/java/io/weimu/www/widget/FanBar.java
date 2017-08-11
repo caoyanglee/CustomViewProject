@@ -32,8 +32,8 @@ public class FanBar extends View {
     private double degreeUnit = Math.PI / 180;
     private float degreeFactor = 360 / 100f;
 
-    private int widthSize;
-    private int heightSize;
+//    private int widthSize;
+//    private int heightSize;
 
 
     private float bigFanRadius = 0;
@@ -126,17 +126,56 @@ public class FanBar extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        switch (widthMode){
+            case MeasureSpec.EXACTLY:
+                Log.e("weimu","widthMode=EXACTLY");
+                break;
+            case MeasureSpec.AT_MOST:
+                Log.e("weimu","widthMode=AT_MOST");
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                Log.e("weimu","widthMode=UNSPECIFIED");
+                break;
+            default:
+                Log.e("weimu","widthMode=NULL");
+                break;
+        }
+
+        switch (heightMode){
+            case MeasureSpec.EXACTLY:
+                Log.e("weimu","heightMode=EXACTLY");
+                break;
+            case MeasureSpec.AT_MOST:
+                Log.e("weimu","heightMode=AT_MOST");
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                Log.e("weimu","heightMode=UNSPECIFIED");
+                break;
+            default:
+                Log.e("weimu","heightMode=NULL");
+                break;
+        }
+
+
+        Log.e("weimu", "onMeasure  widthMode=" + widthMode + " heightMode=" + heightMode + " widthSize=" + widthSize + " heightSize=" + heightSize);
+
+
         setMeasuredDimension(Math.min(widthSize, heightSize), Math.min(widthSize, heightSize));
     }
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        widthSize = w;
-        heightSize = h;
-        setMeasuredDimension(Math.min(widthSize, heightSize), Math.min(widthSize, heightSize));
+        Log.e("weimu", "onSizeChanged");
+        int widthSize = w;
+        int heightSize = h;
 
         bigFanRadius = widthSize / 2;
         smallFanRadius = bigFanRadius - dip2px(8);
@@ -155,6 +194,9 @@ public class FanBar extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        int width = getMeasuredWidth();
+        int height = getMeasuredHeight();
+
         //fan
         float startDegree = 0;
         for (int i = 0; i < dataList.size(); i++) {
@@ -167,7 +209,7 @@ public class FanBar extends View {
         }
 
         //white border
-        canvas.drawCircle(widthSize / 2, heightSize / 2, smallFanRadius - dip2px(4), borderP);
+        canvas.drawCircle(width / 2, height / 2, smallFanRadius - dip2px(4), borderP);
         //choose fan
         if (chooseItem != -1) {
             float bigStartDegree = 0;
@@ -189,28 +231,28 @@ public class FanBar extends View {
             if (i != 0) {
                 dividerDegree += dataList.get(i - 1).getShare() * degreeFactor;
             }
-            canvas.drawLine(widthSize / 2 + (float) (Math.cos(dividerDegree * degreeUnit) * smallFanRadius), heightSize / 2 + (float) (Math.sin(dividerDegree * degreeUnit) * smallFanRadius), widthSize / 2 + (float) (Math.cos(dividerDegree * degreeUnit) * circleBackRadius), heightSize / 2 + (float) (Math.sin(dividerDegree * degreeUnit) * circleBackRadius), dividerP);
+            canvas.drawLine(width / 2 + (float) (Math.cos(dividerDegree * degreeUnit) * smallFanRadius), height / 2 + (float) (Math.sin(dividerDegree * degreeUnit) * smallFanRadius), width / 2 + (float) (Math.cos(dividerDegree * degreeUnit) * circleBackRadius), height / 2 + (float) (Math.sin(dividerDegree * degreeUnit) * circleBackRadius), dividerP);
         }
 
 
         //circle background
-        canvas.drawCircle(widthSize / 2, heightSize / 2, circleBackRadius, circleBackP);
+        canvas.drawCircle(width / 2, height / 2, circleBackRadius, circleBackP);
 
-        if (chooseItem!=-1){
+        if (chooseItem != -1) {
 
             //center text
             String title = dataList.get(chooseItem).getTitle();
-            String share = dataList.get(chooseItem).getShare()+"%";
+            String share = dataList.get(chooseItem).getShare() + "%";
             int color = dataList.get(chooseItem).getColor();
             centerTextP.setColor(color);
 
-            StaticLayout layout = new StaticLayout(title+"\r\n"+share, centerTextP, 300, Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, true);
+            StaticLayout layout = new StaticLayout(title + "\r\n" + share, centerTextP, 300, Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, true);
 
             Paint.FontMetrics fontMetrics = centerTextP.getFontMetrics();
             float top = fontMetrics.top;//为基线到字体上边框的距离,即上图中的top
             float bottom = fontMetrics.bottom;//为基线到字体下边框的距离,即上图中的bottom
             canvas.save();
-            canvas.translate(widthSize / 2, heightSize / 2 - (bottom - top));
+            canvas.translate(width / 2, height / 2 - (bottom - top));
             layout.draw(canvas);
             canvas.restore();//别忘了restore
         }
@@ -277,9 +319,9 @@ public class FanBar extends View {
             endDegree += dataList.get(i).getShare() * degreeFactor;
             if (current < endDegree) {
                 //chooseItem
-                if (i==chooseItem){
-                    chooseItem=-1;
-                }else{
+                if (i == chooseItem) {
+                    chooseItem = -1;
+                } else {
                     chooseItem = i;
                 }
                 postInvalidate();
