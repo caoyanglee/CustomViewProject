@@ -172,7 +172,6 @@ public class IndexChart extends View {
         widthSize = MeasureSpec.getSize(widthMeasureSpec);
         heightSize = MeasureSpec.getSize(heightMeasureSpec);
         setMeasuredDimension(Math.min(widthSize, heightSize), Math.min(widthSize, heightSize));
-        Log.e("weimu", "onMeasure");
     }
 
     @Override

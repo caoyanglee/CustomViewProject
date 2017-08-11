@@ -21,6 +21,6 @@ public class WaveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wave);
 
         WaveView wave = (WaveView) findViewById(R.id.wave);
-        wave.setCurrentProgress(80);
+        wave.setCurrentProgress(45);
     }
 }

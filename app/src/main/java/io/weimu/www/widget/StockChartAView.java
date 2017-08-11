@@ -74,7 +74,6 @@ public class StockChartAView extends View {
     private RectF rectBottom;
 
 
-
     //自定义属性
     private float barViewGap = 1f;//柱状图与柱状图之间的距离
 
@@ -97,6 +96,7 @@ public class StockChartAView extends View {
         //border
         borderP = new Paint();
         initNormalPaint(borderP);
+        borderP.setStyle(Paint.Style.STROKE);
 
         //grid
         gridP = new Paint();
@@ -139,7 +139,7 @@ public class StockChartAView extends View {
         bottomTextP.setTextAlign(Paint.Align.LEFT);
         bottomTextP.setTextSize(dip2px(14));
 
-       //left text
+        //left text
         leftTextP = new Paint();
         initNormalPaint(leftTextP);
         leftTextP.setTextAlign(Paint.Align.LEFT);
@@ -163,16 +163,19 @@ public class StockChartAView extends View {
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
+        setMeasuredDimension(widthSize,heightSize);
+    }
 
-        heightFactor = ((heightSize - dip2px(40) - dip2px(18)) / 4f);
-        widthFactor = widthSize / (float) FRACTION;
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        heightFactor = ((h - dip2px(40) - dip2px(18)) / 4f);
+        widthFactor = w / (float) FRACTION;
 
         lineCharEndY = heightFactor * 3;
         barChartEndY = getHeight() - dip2px(18);
         barCharStartY = barChartEndY - heightFactor;
-
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -189,19 +192,11 @@ public class StockChartAView extends View {
     }
 
 
-
-
     private void drawBorder(Canvas canvas) {
         //border-line chart
-        canvas.drawLine(0, 0, getWidth(), 0, borderP);
-        canvas.drawLine(0, 0, 0, lineCharEndY, borderP);
-        canvas.drawLine(0, lineCharEndY, getWidth(), lineCharEndY, borderP);
-        canvas.drawLine(getWidth(), 0, getWidth(), lineCharEndY, borderP);
+        canvas.drawRect(0, 0, getWidth(), lineCharEndY, borderP);
         //border-bar chart
-        canvas.drawLine(0, barCharStartY, getWidth(), barCharStartY, borderP);
-        canvas.drawLine(0, barChartEndY, getWidth(), barChartEndY, borderP);
-        canvas.drawLine(0, barChartEndY, 0, barCharStartY, borderP);
-        canvas.drawLine(getWidth(), barChartEndY, getWidth(), barCharStartY, borderP);
+        canvas.drawRect(0,barCharStartY,getWidth(),barChartEndY,borderP);
     }
 
 
@@ -251,9 +246,9 @@ public class StockChartAView extends View {
             for (int i = 1; i <= barDatas.size(); i++) {
                 float x = widthFactor * (i - 1) + widthFactor / 2;
                 float y = (float) (barChartEndY - (barDatas.get(i - 1).getValueY() * barHeightFactor));
-                if (i%2==0){
+                if (i % 2 == 0) {
                     barP.setColor(Color.rgb(13, 103, 14));
-                }else{
+                } else {
                     barP.setColor(Color.RED);
                 }
                 canvas.drawRect(x - widthFactor / 2 + barViewGap, y, x + widthFactor / 2 - barViewGap, barChartEndY, barP);
@@ -338,12 +333,13 @@ public class StockChartAView extends View {
     }
 
     private void drawLineChartLeftText(Canvas canvas) {
+        if (lineDatas == null || lineDatas.size() == 0) return;
         LineData max = Collections.max(lineDatas);
         LineData min = Collections.min(lineDatas);
 
-        canvas.drawText(max.getValueY()+"",dip2px(2),dip2px(14),leftTextP);
-        canvas.drawText(max.getValueY()/2+"",dip2px(2),lineCharEndY/2+dip2px(4),leftTextP);
-        canvas.drawText(min.getValueY()+"",dip2px(2),lineCharEndY-dip2px(4),leftTextP);
+        canvas.drawText(max.getValueY() + "", dip2px(2), dip2px(14), leftTextP);
+        canvas.drawText(max.getValueY() / 2 + "", dip2px(2), lineCharEndY / 2 + dip2px(4), leftTextP);
+        canvas.drawText(min.getValueY() + "", dip2px(2), lineCharEndY - dip2px(4), leftTextP);
     }
 
 
@@ -370,20 +366,20 @@ public class StockChartAView extends View {
     public void setLineDatas(List<LineData> lineDatas) {
         this.lineDatas = lineDatas;
         lineDiff = computeLineChartMinMaxDiff(lineDatas);
-        invalidate();
+        postInvalidate();
     }
 
 
     public void setLineAverageDatas(List<LineData> lineAverageDatas) {
         this.lineAverageDatas = lineAverageDatas;
         barDiff = computeLineChartMinMaxDiff(lineAverageDatas);
-        invalidate();
+        postInvalidate();
     }
 
     public void setBarDatas(List<BarData> barDatas) {
         this.barDatas = barDatas;
         barDiff = computeBarChartMinMaxDiff(barDatas);
-        invalidate();
+        postInvalidate();
     }
 
     //计算【柱状图】差值=最大值-最小值

@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void itemClick(View v){
         switch (v.getId()){
+            case R.id.btn_test://测试专用
+                startActivity(TestAreaActivity.newIntent(this));
+                break;
             case R.id.btn_circle_progress_bar:
                 startActivity(CircleProgressBarActivity.newIntent(this));
                 break;

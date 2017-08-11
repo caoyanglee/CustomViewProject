@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
 import android.graphics.Shader;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import static io.weimu.www.widget.WaveView.BORDER.CIRCLE;
+import static io.weimu.www.widget.WaveView.BORDER.SQUARE;
 
 /**
  * @author 艹羊
@@ -37,6 +39,7 @@ public class WaveView extends View {
     private float mCycleFactorW;
 
     private int mTotalWidth, mTotalHeight;
+    private RectF viewRect;
 
 
     private ValueAnimator valueAnimator;
@@ -63,7 +66,7 @@ public class WaveView extends View {
     private int gradientC = Color.argb(128, 255, 201, 151);
 
     //control parameter
-    private int currentProgress = 50;//0~100
+    private int currentProgress = 0;//0~100
 
 
     //画笔
@@ -114,8 +117,10 @@ public class WaveView extends View {
         mBorderPaint.setAntiAlias(true);
         mBorderPaint.setStyle(Paint.Style.STROKE);
         mBorderPaint.setColor(borderColor);
+
         //text
         mtextPaint = new Paint();
+        mBorderPaint.setAntiAlias(true);
         mtextPaint.setColor(Color.WHITE);
         mtextPaint.setStrokeWidth(dip2px(2));
         mtextPaint.setTextSize(sp2px(30));
@@ -127,6 +132,15 @@ public class WaveView extends View {
 
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        setMeasuredDimension(Math.min(widthSize, heightSize), Math.min(widthSize, heightSize));
+    }
+
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -134,6 +148,8 @@ public class WaveView extends View {
         // 记录下view的宽高
         mTotalWidth = w;
         mTotalHeight = h;
+
+        viewRect = new RectF(0,0,mTotalWidth,mTotalHeight);
 
         if (borderStyle == CIRCLE) {
             int min = Math.min(mTotalWidth, mTotalHeight);
@@ -147,6 +163,8 @@ public class WaveView extends View {
 
         heightFactor = mTotalHeight / 100;
 
+
+        if (valueAnimator != null) valueAnimator.cancel();
         valueAnimator = ValueAnimator.ofInt(0, mTotalWidth);
         valueAnimator.setDuration(3000);
         valueAnimator.setRepeatCount(-1);
@@ -175,7 +193,7 @@ public class WaveView extends View {
 
 
         //save as new layer
-        int sc = canvas.saveLayer(0, 0, mTotalWidth, mTotalHeight, null, Canvas.ALL_SAVE_FLAG);
+        int sc = canvas.saveLayer(viewRect, mBorderPaint, Canvas.ALL_SAVE_FLAG);
 
 
         if (borderStyle == CIRCLE) {
@@ -195,6 +213,7 @@ public class WaveView extends View {
         //wave1
         firstWavePath.reset();
         firstWavePath.moveTo(0, mTotalHeight);
+
         //wave2
         secondWavePath.reset();
         secondWavePath.moveTo(0, mTotalHeight);
@@ -215,6 +234,7 @@ public class WaveView extends View {
         canvas.drawPath(firstWavePath, mWavePaint);
         canvas.drawPath(secondWavePath, mWavePaint);
 
+
         //border
         if (borderWidth != 0) {
             switch (borderStyle) {
@@ -222,24 +242,21 @@ public class WaveView extends View {
                     canvas.drawCircle(mTotalWidth / 2, mTotalWidth / 2, mTotalWidth / 2, mBorderPaint);
                     break;
                 case SQUARE:
-                    canvas.drawLine(0, 0, 0, mTotalWidth, mBorderPaint);
-                    canvas.drawLine(mTotalHeight, 0, mTotalHeight, mTotalWidth, mBorderPaint);
-                    canvas.drawLine(0, 0, mTotalHeight, 0, mBorderPaint);
-                    canvas.drawLine(0, mTotalWidth, mTotalHeight, mTotalWidth, mBorderPaint);
+                    canvas.drawRect(0, 0, mTotalWidth, mTotalHeight, mBorderPaint);
                     break;
             }
         }
+
+
         //text
         canvas.drawText(currentProgress + "%", mTotalWidth / 2, mTotalHeight / 8 * 7, mtextPaint);
 
-
+        mWavePaint.setXfermode(null);
         mBorderPaint.setXfermode(null);
-        mBackPaint.setXfermode(null);
         mtextPaint.setXfermode(null);
 
         //restore to canvas
         canvas.restoreToCount(sc);
-
 
     }
 
@@ -291,8 +308,5 @@ public class WaveView extends View {
             valueAnimator.cancel();
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
+
 }
