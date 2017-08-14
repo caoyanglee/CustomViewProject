@@ -56,14 +56,11 @@ public class FanBar extends View {
     private int chooseItem = 0;
 
     public FanBar(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
-
     public FanBar(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context, attrs, 0);
     }
 
     public FanBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -132,38 +129,38 @@ public class FanBar extends View {
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        switch (widthMode){
-            case MeasureSpec.EXACTLY:
-                Log.e("weimu","widthMode=EXACTLY");
-                break;
-            case MeasureSpec.AT_MOST:
-                Log.e("weimu","widthMode=AT_MOST");
-                break;
-            case MeasureSpec.UNSPECIFIED:
-                Log.e("weimu","widthMode=UNSPECIFIED");
-                break;
-            default:
-                Log.e("weimu","widthMode=NULL");
-                break;
-        }
-
-        switch (heightMode){
-            case MeasureSpec.EXACTLY:
-                Log.e("weimu","heightMode=EXACTLY");
-                break;
-            case MeasureSpec.AT_MOST:
-                Log.e("weimu","heightMode=AT_MOST");
-                break;
-            case MeasureSpec.UNSPECIFIED:
-                Log.e("weimu","heightMode=UNSPECIFIED");
-                break;
-            default:
-                Log.e("weimu","heightMode=NULL");
-                break;
-        }
-
-
-        Log.e("weimu", "onMeasure  widthMode=" + widthMode + " heightMode=" + heightMode + " widthSize=" + widthSize + " heightSize=" + heightSize);
+//        switch (widthMode){
+//            case MeasureSpec.EXACTLY:
+//                Log.e("weimu","widthMode=EXACTLY");
+//                break;
+//            case MeasureSpec.AT_MOST:
+//                Log.e("weimu","widthMode=AT_MOST");
+//                break;
+//            case MeasureSpec.UNSPECIFIED:
+//                Log.e("weimu","widthMode=UNSPECIFIED");
+//                break;
+//            default:
+//                Log.e("weimu","widthMode=NULL");
+//                break;
+//        }
+//
+//        switch (heightMode){
+//            case MeasureSpec.EXACTLY:
+//                Log.e("weimu","heightMode=EXACTLY");
+//                break;
+//            case MeasureSpec.AT_MOST:
+//                Log.e("weimu","heightMode=AT_MOST");
+//                break;
+//            case MeasureSpec.UNSPECIFIED:
+//                Log.e("weimu","heightMode=UNSPECIFIED");
+//                break;
+//            default:
+//                Log.e("weimu","heightMode=NULL");
+//                break;
+//        }
+//
+//
+//        Log.e("weimu", "onMeasure  widthMode=" + widthMode + " heightMode=" + heightMode + " widthSize=" + widthSize + " heightSize=" + heightSize);
 
 
         setMeasuredDimension(Math.min(widthSize, heightSize), Math.min(widthSize, heightSize));

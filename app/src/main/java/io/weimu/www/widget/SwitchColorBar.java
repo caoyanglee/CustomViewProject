@@ -151,7 +151,7 @@ public class SwitchColorBar extends View {
         //center circle bar
         matrix.postTranslate(-switchBitmp.getWidth() / 2, -switchBitmp.getHeight() / 2);//步骤1
         matrix.postRotate(-(270 - startAngle) + (currentAngle - startAngle));///步骤2
-        matrix.postTranslate(switchBitmp.getWidth() / 2, switchBitmp.getHeight() / 2);//步骤1
+        matrix.postTranslate(switchBitmp.getWidth() / 2, switchBitmp.getHeight() / 2);//步骤3
         matrix.postTranslate(dip2px(28), dip2px(28));
         canvas.drawBitmap(switchBitmp, matrix, null);//步骤4
         matrix.reset();

@@ -15,6 +15,7 @@ import io.weimu.www.bean.LineData;
 import io.weimu.www.ui.CircleProgressBarActivity;
 import io.weimu.www.ui.FanbarActivity;
 import io.weimu.www.ui.IndexChartActivity;
+import io.weimu.www.ui.ProgresButtonActivity;
 import io.weimu.www.ui.StockChartActivity;
 import io.weimu.www.ui.SwitchColorBarActivity;
 import io.weimu.www.ui.TextViewWithBorderActivity;
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void itemClick(View v){
-        switch (v.getId()){
+    public void itemClick(View v) {
+        switch (v.getId()) {
             case R.id.btn_test://测试专用
                 startActivity(TestAreaActivity.newIntent(this));
                 break;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_wave:
                 startActivity(WaveActivity.newIntent(this));
+                break;
+            case R.id.btn_progress_button:
+                startActivity(ProgresButtonActivity.newIntent(this));
                 break;
         }
     }

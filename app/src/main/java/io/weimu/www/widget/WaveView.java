@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -164,17 +165,18 @@ public class WaveView extends View {
         heightFactor = mTotalHeight / 100;
 
 
+        Log.e("weimu","刷新 valueAnimator");
         if (valueAnimator != null) valueAnimator.cancel();
         valueAnimator = ValueAnimator.ofInt(0, mTotalWidth);
         valueAnimator.setDuration(3000);
-        valueAnimator.setRepeatCount(-1);
+        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mXOneOffset = (int) animation.getAnimatedValue();
-//                Log.e("weimu", "mXOneOffset=" + mXOneOffset);
-                postInvalidate();
+                Log.e("weimu", "mXOneOffset=" + mXOneOffset);
+               postInvalidate();
             }
         });
         valueAnimator.start();
@@ -187,10 +189,11 @@ public class WaveView extends View {
         valueAnimator.cancel();
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        Log.e("weimu","刷新 onDraw");
 
         //save as new layer
         int sc = canvas.saveLayer(viewRect, mBorderPaint, Canvas.ALL_SAVE_FLAG);

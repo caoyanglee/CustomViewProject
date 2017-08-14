@@ -179,7 +179,6 @@ public class IndexChart extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         widthSize = w;
         heightSize = h;
-        setMeasuredDimension(Math.min(widthSize, heightSize), Math.min(widthSize, heightSize));
         mShader = new LinearGradient(0, 0, widthSize, heightSize, new int[]{gradientA, gradientB, gradientC, gradientD}, null, Shader.TileMode.MIRROR);
 
         colorBarOuterRadius = widthSize / 2 - dip2px(padding) - dip2px(indexBarColorBarSpace);
