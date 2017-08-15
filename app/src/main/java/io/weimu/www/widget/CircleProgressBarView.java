@@ -85,6 +85,7 @@ public class CircleProgressBarView extends View {
         isShowText = a.getBoolean(R.styleable.CircleProgressBarView_isShowText, true);
         mTextColor = a.getColor(R.styleable.CircleProgressBarView_textColor, mProgressBarColor);
         isFanShaped = a.getBoolean(R.styleable.CircleProgressBarView_isFanShaped, false);
+        a.recycle();
     }
 
 
@@ -289,4 +290,5 @@ public class CircleProgressBarView extends View {
     public void setmTextColor(int mTextColor) {
         this.mTextColor = mTextColor;
     }
+
 }

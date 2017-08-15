@@ -49,28 +49,8 @@ public class WaveView extends View {
     private int mXOneOffset = 0;
     private float heightFactor = 0;
 
-    //custom parameter
-    //-border
-    private int borderColor = Color.rgb(255, 168, 170);
-    private int borderWidth = 1;//dp unit
-    private BORDER borderStyle = CIRCLE;
-    //-background
-    private int backgroundColor = Color.rgb(251, 251, 250);
-    //-wave
-    private Path firstWavePath;
-    private Path secondWavePath;
-    private int firstWaveSpeed = 3;//3
-    private int secondWaveSpeed = 5;//5
-    //from deep to shallow
-    private int gradientA = Color.argb(128, 234, 100, 142);
-    private int gradientB = Color.argb(128, 255, 150, 142);
-    private int gradientC = Color.argb(128, 255, 201, 151);
 
-    //control parameter
-    private int currentProgress = 0;//0~100
-
-
-    //画笔
+    //paint
     private Paint mWavePaint;
     private Paint mBackPaint;
     private Paint mBorderPaint;
@@ -78,6 +58,32 @@ public class WaveView extends View {
 
     private PorterDuffXfermode mixMode;
     private LinearGradient mShader;
+
+
+    //custom field
+    private int currentProgress = 0;//0~100
+
+    //-border
+    private BORDER borderStyle = CIRCLE;
+    private int borderColor = Color.rgb(255, 168, 170);
+    private int borderWidth = 1;//dp unit
+
+    //-background
+    private int backgroundColor = Color.rgb(251, 251, 250);;
+
+
+    //-wave
+    private boolean isUseGradient = true;//是否使用过度颜色
+    private Path firstWavePath;
+    private Path secondWavePath;
+    private int firstWaveSpeed = 3;//3
+    private int secondWaveSpeed = 5;//5
+    private int firstWaveColor = Color.argb(10, 255, 255, 255);
+    private int secondWaveColor = Color.argb(15, 255, 255, 255);
+    //from top to bottom
+    private int[] gradientArray = new int[]{Color.argb(128, 255, 201, 151), Color.argb(128, 255, 150, 142), Color.argb(128, 234, 100, 142)};
+    //text
+    private boolean isShowText = true;//是否显示文字
 
 
     public WaveView(Context context) {
@@ -94,8 +100,6 @@ public class WaveView extends View {
     }
 
     private void init() {
-
-
         //background
         mBackPaint = new Paint();
         mBackPaint.setStrokeWidth(dip2px(1));
@@ -142,7 +146,6 @@ public class WaveView extends View {
     }
 
 
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -150,7 +153,7 @@ public class WaveView extends View {
         mTotalWidth = w;
         mTotalHeight = h;
 
-        viewRect = new RectF(0,0,mTotalWidth,mTotalHeight);
+        viewRect = new RectF(0, 0, mTotalWidth, mTotalHeight);
 
         if (borderStyle == CIRCLE) {
             int min = Math.min(mTotalWidth, mTotalHeight);
@@ -165,7 +168,6 @@ public class WaveView extends View {
         heightFactor = mTotalHeight / 100;
 
 
-        Log.e("weimu","刷新 valueAnimator");
         if (valueAnimator != null) valueAnimator.cancel();
         valueAnimator = ValueAnimator.ofInt(0, mTotalWidth);
         valueAnimator.setDuration(3000);
@@ -175,8 +177,7 @@ public class WaveView extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mXOneOffset = (int) animation.getAnimatedValue();
-                Log.e("weimu", "mXOneOffset=" + mXOneOffset);
-               postInvalidate();
+                postInvalidate();
             }
         });
         valueAnimator.start();
@@ -193,8 +194,6 @@ public class WaveView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.e("weimu","刷新 onDraw");
-
         //save as new layer
         int sc = canvas.saveLayer(viewRect, mBorderPaint, Canvas.ALL_SAVE_FLAG);
 
@@ -209,9 +208,6 @@ public class WaveView extends View {
             canvas.drawRect(0, 0, mTotalWidth, mTotalHeight, mBackPaint);
         }
 
-
-        mShader = new LinearGradient(mTotalWidth / 2, mTotalHeight - currentProgress * heightFactor, mTotalWidth / 2, mTotalHeight, new int[]{gradientC, gradientB, gradientA}, null, Shader.TileMode.CLAMP);
-        mWavePaint.setShader(mShader);
 
         //wave1
         firstWavePath.reset();
@@ -234,8 +230,17 @@ public class WaveView extends View {
                 secondWavePath.close();
             }
         }
-        canvas.drawPath(firstWavePath, mWavePaint);
-        canvas.drawPath(secondWavePath, mWavePaint);
+        if (isUseGradient) {
+            mShader = new LinearGradient(mTotalWidth / 2, mTotalHeight - currentProgress * heightFactor, mTotalWidth / 2, mTotalHeight, gradientArray, null, Shader.TileMode.CLAMP);
+            mWavePaint.setShader(mShader);
+            canvas.drawPath(firstWavePath, mWavePaint);
+            canvas.drawPath(secondWavePath, mWavePaint);
+        } else {
+            mWavePaint.setColor(firstWaveColor);
+            canvas.drawPath(firstWavePath, mWavePaint);
+            mWavePaint.setColor(secondWaveColor);
+            canvas.drawPath(secondWavePath, mWavePaint);
+        }
 
 
         //border
@@ -250,9 +255,11 @@ public class WaveView extends View {
             }
         }
 
-
         //text
-        canvas.drawText(currentProgress + "%", mTotalWidth / 2, mTotalHeight / 8 * 7, mtextPaint);
+        if (isShowText) {
+            canvas.drawText(currentProgress + "%", mTotalWidth / 2, mTotalHeight / 8 * 7, mtextPaint);
+        }
+
 
         mWavePaint.setXfermode(null);
         mBorderPaint.setXfermode(null);
@@ -282,7 +289,7 @@ public class WaveView extends View {
     }
 
 
-    public void setCurrentProgress(int currentProgress) {
+    public void setCurrentProgressWithAnim(int currentProgress) {
         if (currentProgress > 100) currentProgress = 100;
         if (currentProgress < 0) currentProgress = 0;
         ValueAnimator valueAnimator = ValueAnimator.ofInt(0, currentProgress);
@@ -298,6 +305,12 @@ public class WaveView extends View {
         valueAnimator.start();
     }
 
+    public void setCurrentProgress(int currentProgress) {
+        WaveView.this.currentProgress = currentProgress;
+        postInvalidate();
+    }
+
+
     public void setBorderStyle(BORDER borderStyle) {
         this.borderStyle = borderStyle;
     }
@@ -309,6 +322,15 @@ public class WaveView extends View {
     public void stopAnim() {
         if (valueAnimator.isRunning())
             valueAnimator.cancel();
+    }
+
+
+    public void setUseGradient(boolean useGradient) {
+        isUseGradient = useGradient;
+    }
+
+    public void setShowText(boolean showText) {
+        isShowText = showText;
     }
 
 

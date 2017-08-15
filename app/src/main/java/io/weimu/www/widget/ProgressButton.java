@@ -8,8 +8,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
+import android.support.annotation.Px;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
@@ -194,4 +196,5 @@ public class ProgressButton extends View {
         final float fontScale = getContext().getResources().getDisplayMetrics().density;
         return (int) (spValue / fontScale + 0.5f);
     }
+
 }

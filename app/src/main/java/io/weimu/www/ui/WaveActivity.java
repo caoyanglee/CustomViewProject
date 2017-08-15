@@ -2,6 +2,7 @@ package io.weimu.www.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -20,7 +21,8 @@ public class WaveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wave);
 
-        WaveView wave = (WaveView) findViewById(R.id.wave);
+        final WaveView wave = (WaveView) findViewById(R.id.wave);
         wave.setCurrentProgress(45);
+
     }
 }
