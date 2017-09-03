@@ -59,9 +59,6 @@ public class GranuleGridView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        setMeasuredDimension(Math.min(widthSize, heightSize), Math.min(widthSize, heightSize));
     }
 
     @Override

@@ -7,7 +7,6 @@
     tools:context="io.weimu.www.ui.GranuleGridActivity">
 
     <io.weimu.www.widget.granule.GranuleGridView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center" />
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
 </FrameLayout>
