@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lin_home"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lin_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -77,6 +77,13 @@
 
             <Button
                 android:id="@+id/btn_progress_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="itemClick"
+                android:text="progress button" />
+
+            <Button
+                android:id="@+id/btn_granule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="itemClick"

@@ -17,6 +17,7 @@ import io.weimu.www.bean.LineData;
 import io.weimu.www.helper.StatusBarUtil;
 import io.weimu.www.ui.CircleProgressBarActivity;
 import io.weimu.www.ui.FanbarActivity;
+import io.weimu.www.ui.GranuleGridActivity;
 import io.weimu.www.ui.IndexChartActivity;
 import io.weimu.www.ui.ProgresButtonActivity;
 import io.weimu.www.ui.StockChartActivity;
@@ -28,6 +29,7 @@ import io.weimu.www.widget.StockChartAView;
 import io.weimu.www.widget.SwitchColorBar;
 import io.weimu.www.widget.TextViewWithBorder;
 import io.weimu.www.widget.WaveView;
+import io.weimu.www.widget.granule.Granule;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StatusBarUtil.setColor(this, Color.RED);
-        String str = "十六铺金融";
-        Log.e("weimu", "strCode=" + str.hashCode());
     }
 
 
@@ -69,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_progress_button:
                 startActivity(ProgresButtonActivity.newIntent(this));
+                break;
+            case R.id.btn_granule://粒子连线
+                startActivity(GranuleGridActivity.newIntent(this));
                 break;
         }
     }

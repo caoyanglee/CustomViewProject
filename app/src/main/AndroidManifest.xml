@@ -24,7 +24,8 @@
         <activity android:name=".ui.CircleProgressBarActivity" />
         <activity android:name=".ui.TextViewWithBorderActivity" />
         <activity android:name=".TestAreaActivity" />
-        <activity android:name=".ui.ProgresButtonActivity"></activity>
+        <activity android:name=".ui.ProgresButtonActivity" />
+        <activity android:name=".ui.GranuleGridActivity"></activity>
     </application>
 
 </manifest>

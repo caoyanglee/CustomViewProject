@@ -28,16 +28,7 @@ public class TestAreaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_area);
 
-        ProgressButton pb = (ProgressButton) findViewById(R.id.pt);
-        pb.runAnimation();
 
-
-        pb.setOnAnimationFinishListener(new ProgressButton.OnAnimationFinishListener() {
-            @Override
-            public void onFinish() {
-                Toast.makeText(TestAreaActivity.this,"结束了",Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
