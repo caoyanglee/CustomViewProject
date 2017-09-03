@@ -74,7 +74,6 @@ public class GranuleGridView extends View {
     private void beginAnim() {
         if (valueAnimator != null) valueAnimator.cancel();
         valueAnimator = ValueAnimator.ofInt(0, 100);
-        valueAnimator.setDuration(100);
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -130,13 +129,13 @@ public class GranuleGridView extends View {
 
     //粒子默认配置
     public static class GranuleConfig {
-        final static int totalNumber = 10;
+        final static int totalNumber = 20;
         final static float defaultSpeed = 1.0f;
         final static float variantSpeed = 5.0f;
         final static int granuleColor = Color.rgb(241, 219, 132);
         final static int lineColor = Color.rgb(241, 219, 132);
         final static float defaultRadius = 1.0f;
-        final static float variantRadius = 2.0f;
+        final static float variantRadius = 1.0f;
         final static float minDistance = 400;
     }
 
