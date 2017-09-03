@@ -32,4 +32,7 @@ public class CircleProgressBarActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
+
+
 }

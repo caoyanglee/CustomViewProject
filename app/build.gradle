@@ -40,4 +40,5 @@ dependencies {
     compile 'com.squareup.okio:okio:1.8.0'
     compile 'com.gelitenight.waveview:waveview:1.0.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:25.3.1'
 }

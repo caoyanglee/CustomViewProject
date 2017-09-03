@@ -1,8 +1,10 @@
 package io.weimu.www;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,6 +14,7 @@ import java.util.Random;
 
 import io.weimu.www.bean.BarData;
 import io.weimu.www.bean.LineData;
+import io.weimu.www.helper.StatusBarUtil;
 import io.weimu.www.ui.CircleProgressBarActivity;
 import io.weimu.www.ui.FanbarActivity;
 import io.weimu.www.ui.IndexChartActivity;
@@ -32,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        StatusBarUtil.setColor(this, Color.RED);
+        String str = "十六铺金融";
+        Log.e("weimu", "strCode=" + str.hashCode());
     }
 
 

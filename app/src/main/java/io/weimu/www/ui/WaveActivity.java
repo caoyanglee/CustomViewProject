@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import io.weimu.www.R;
 import io.weimu.www.widget.WaveView;
@@ -22,7 +23,16 @@ public class WaveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wave);
 
         final WaveView wave = (WaveView) findViewById(R.id.wave);
-        wave.setCurrentProgress(45);
+        wave.setCurrentProgress(50);
+
+
+        wave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wave.setCurrentProgress(33);
+            }
+        });
+
 
     }
 }
