@@ -89,7 +89,7 @@ public class GranuleGridView extends View {
 
         for (int i = 0; i < granuleList.size(); i++) {
             Granule outItem = granuleList.get(i);
-            pointP.setColor(outItem.getGranuleColor());
+            pointP.setColor(GranuleConfig.granuleColor);
             outItem.update();
             canvas.drawCircle(outItem.getPoint().x, outItem.getPoint().y, dip2px(outItem.getRadius()), pointP);
 
@@ -126,7 +126,7 @@ public class GranuleGridView extends View {
 
     //粒子默认配置
     public static class GranuleConfig {
-        final static int totalNumber = 20;
+        final static int totalNumber = 25;
         final static float defaultSpeed = 1.0f;
         final static float variantSpeed = 5.0f;
         final static int granuleColor = Color.rgb(241, 219, 132);
