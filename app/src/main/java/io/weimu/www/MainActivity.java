@@ -1,19 +1,10 @@
 package io.weimu.www;
 
-import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import io.weimu.www.bean.BarData;
-import io.weimu.www.bean.LineData;
 import io.weimu.www.helper.StatusBarUtil;
 import io.weimu.www.ui.CircleProgressBarActivity;
 import io.weimu.www.ui.FanbarActivity;
@@ -24,12 +15,6 @@ import io.weimu.www.ui.StockChartActivity;
 import io.weimu.www.ui.SwitchColorBarActivity;
 import io.weimu.www.ui.TextViewWithBorderActivity;
 import io.weimu.www.ui.WaveActivity;
-import io.weimu.www.widget.CircleProgressBarView;
-import io.weimu.www.widget.StockChartAView;
-import io.weimu.www.widget.SwitchColorBar;
-import io.weimu.www.widget.TextViewWithBorder;
-import io.weimu.www.widget.WaveView;
-import io.weimu.www.widget.granule.Granule;
 
 public class MainActivity extends AppCompatActivity {
 

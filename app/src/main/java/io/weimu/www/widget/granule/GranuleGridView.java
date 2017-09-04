@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
@@ -93,6 +92,7 @@ public class GranuleGridView extends View {
             outItem.update();
             canvas.drawCircle(outItem.getPoint().x, outItem.getPoint().y, dip2px(outItem.getRadius()), pointP);
 
+            //循环遍历各个点 判断最少的距离
             for (Granule innerItem : granuleList) {
                 double pointDistance = get2pointDistance(outItem, innerItem);
 

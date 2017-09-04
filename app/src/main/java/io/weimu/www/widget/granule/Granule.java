@@ -1,9 +1,6 @@
 package io.weimu.www.widget.granule;
 
-import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.PointF;
-import android.util.Log;
 
 /**
  * @author 艹羊
