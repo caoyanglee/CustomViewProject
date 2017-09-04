@@ -105,7 +105,7 @@ public class GranuleGridView extends View {
     }
 
     private int getLineAlpha(double distance) {
-        return (int) (1-(distance / GranuleConfig.minDistance)*255);
+        return (int) (1 - (distance / GranuleConfig.minDistance) * 255);
     }
 
 
@@ -142,11 +142,21 @@ public class GranuleGridView extends View {
         return (int) (dpValue * scale + 0.5f);
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
+    public void cancelAnim() {
         if (valueAnimator != null && valueAnimator.isRunning()) {
             valueAnimator.cancel();
         }
+    }
+
+    public void startAnim() {
+        if (valueAnimator != null && !valueAnimator.isRunning()) {
+            valueAnimator.start();
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        cancelAnim();
     }
 }
