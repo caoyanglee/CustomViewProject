@@ -56,7 +56,7 @@ public class SwitchColorBar extends View {
     private float endAngle = 417;//经过计算得出
     private float angleFactor = (endAngle - startAngle) / FRACTION;
 
-    private float currentAngle = 123;
+    private float currentAngle = 124;//默认显示1'的bar
 
     private int middleCircleRadius = 0;
 
@@ -134,6 +134,7 @@ public class SwitchColorBar extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
         canvas.drawBitmap(circleGreyBitmap, SrcRect, DesRect, null);
         //save as new layer
         int sc = canvas.saveLayer(viewRect, showBarP, Canvas.ALL_SAVE_FLAG);
