@@ -27,10 +27,14 @@ public class Granule {
         point.y = (int) (Math.random() * h);
         speed = (float) (GranuleGridView.GranuleConfig.defaultSpeed + Math.random() * GranuleGridView.GranuleConfig.variantSpeed);
         angle = (float) Math.floor(Math.random() * 360);
+        if (angle % 90 == 0) {
+            angle += 45;
+        }
         radius = (float) (GranuleGridView.GranuleConfig.defaultRadius + Math.random() * GranuleGridView.GranuleConfig.variantRadius);
         acceleratedSpeed.x = (float) (speed * Math.cos(angle));
         acceleratedSpeed.y = (float) (speed * Math.sin(angle));
     }
+
     //展示方式1-从四周发射粒子
     private void reCreateGranuleByAround() {
         if (point.x >= w || point.x <= 0 || point.y >= h || point.y <= 0) {
@@ -69,6 +73,7 @@ public class Granule {
         }
 
     }
+
     //展示方式2-粒子可遇壁反弹
     private void reCreateGranuleByReflect() {
         if (point.x >= w || point.x <= 0) {      //如果到达左右边界，就让x轴的速度变为原来的负数
@@ -81,7 +86,7 @@ public class Granule {
     }
 
     public void update() {
-        this.reCreateGranuleByAround();
+        this.reCreateGranuleByReflect();
         point.x += acceleratedSpeed.x;                //粒子下一时刻在x轴的坐标
         point.y += acceleratedSpeed.y;
     }

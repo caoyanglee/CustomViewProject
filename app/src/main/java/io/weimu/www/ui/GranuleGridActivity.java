@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import io.weimu.www.R;
+import io.weimu.www.widget.granule.GranuleGridView;
 
 public class GranuleGridActivity extends AppCompatActivity {
 
@@ -19,5 +20,7 @@ public class GranuleGridActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_granule_grid);
+        GranuleGridView ggv = (GranuleGridView) findViewById(R.id.ggv);
+        ggv.setGranuleNumber(20);
     }
 }

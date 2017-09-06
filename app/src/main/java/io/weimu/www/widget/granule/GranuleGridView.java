@@ -47,6 +47,7 @@ public class GranuleGridView extends View {
         pointP.setColor(Color.WHITE);
         pointP.setStyle(Paint.Style.FILL);
         pointP.setAntiAlias(true);
+        pointP.setColor(GranuleConfig.granuleColor);
 
         lineP = new Paint();
         lineP.setStyle(Paint.Style.FILL);
@@ -84,11 +85,10 @@ public class GranuleGridView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.rgb(0, 0, 0));
+        canvas.drawColor(Color.rgb(236, 26, 43));
 
         for (int i = 0; i < granuleList.size(); i++) {
             Granule outItem = granuleList.get(i);
-            pointP.setColor(GranuleConfig.granuleColor);
             outItem.update();
             canvas.drawCircle(outItem.getPoint().x, outItem.getPoint().y, dip2px(outItem.getRadius()), pointP);
 
@@ -126,15 +126,20 @@ public class GranuleGridView extends View {
 
     //粒子默认配置
     public static class GranuleConfig {
-        final static int totalNumber = 25;
-        final static float defaultSpeed = 1.0f;
-        final static float variantSpeed = 5.0f;
-        final static int granuleColor = Color.rgb(241, 219, 132);
-        final static int lineColor = Color.rgb(241, 219, 132);
-        final static float defaultRadius = 1.0f;
-        final static float variantRadius = 1.0f;
-        final static float minDistance = 400;
+        static int totalNumber = 20;
+        static float defaultSpeed = 1.0f;
+        static float variantSpeed = 5.0f;
+        static int granuleColor = Color.rgb(255, 255, 255);
+        static int lineColor = Color.rgb(255, 255, 255);
+        static float defaultRadius = 1.0f;
+        static float variantRadius = 1.0f;
+        static float minDistance = 300;
     }
+
+    public void setGranuleNumber(int number) {
+        GranuleConfig.totalNumber = number;
+    }
+
 
     //根据手机的分辨率从 dp 的单位 转成为 px(像素)
     public int dip2px(float dpValue) {
