@@ -265,7 +265,7 @@ public class StockChartAView extends View {
             } catch (Exception e) {
                 if (e instanceof IndexOutOfBoundsException) return;
             }
-            if (cell >= 0 && cell < FRACTION) {
+            if (cell >= 0 && cell <= FRACTION) {
                 Log.e("weimu", "cell=" + cell);
                 //horizontal
                 float x = widthFactor * (cell - 1) + widthFactor / 2;
