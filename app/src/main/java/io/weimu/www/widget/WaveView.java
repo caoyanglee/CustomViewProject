@@ -49,7 +49,7 @@ public class WaveView extends View {
     private Paint mWavePaint;
     private Paint mBackPaint;
     private Paint mBorderPaint;
-    private Paint mtextPaint;
+    private Paint mTextPaint;
 
 
     //custom field
@@ -115,12 +115,12 @@ public class WaveView extends View {
         mBorderPaint.setColor(borderColor);
 
         //text
-        mtextPaint = new Paint();
-        mBorderPaint.setAntiAlias(true);
-        mtextPaint.setColor(Color.WHITE);
-        mtextPaint.setStrokeWidth(dip2px(2));
-        mtextPaint.setTextSize(sp2px(30));
-        mtextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextPaint = new Paint();
+        mTextPaint.setAntiAlias(true);
+        mTextPaint.setColor(Color.WHITE);
+        mTextPaint.setStrokeWidth(dip2px(2));
+        mTextPaint.setTextSize(sp2px(30));
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
     }
 
     @Override
@@ -185,20 +185,24 @@ public class WaveView extends View {
         valueAnimator.start();
     }
 
+    private ValueAnimator verticalAnim;
 
     private void beginVerticalAnim() {
         mShaderMatrix.reset();
         mShaderMatrix2.reset();
-        final ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, getHeight());
-        valueAnimator.setDuration(2000);
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        if (verticalAnim!=null&&verticalAnim.isRunning()){
+            verticalAnim.cancel();
+        }
+        verticalAnim = ValueAnimator.ofFloat(0, getHeight());
+        verticalAnim.setDuration(2000);
+        verticalAnim.setInterpolator(new LinearInterpolator());
+        verticalAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
                 WaveView.this.currentProgress = (int) Math.floor(value / heightFactor);
                 if (value >= heightFactor * targetProgress) {
-                    valueAnimator.cancel();
+                    verticalAnim.cancel();
                     return;
                 }
                 mShaderMatrix.postTranslate(0, -heightFactor);
@@ -207,7 +211,7 @@ public class WaveView extends View {
                 mWaveShader2.setLocalMatrix(mShaderMatrix2);
             }
         });
-        valueAnimator.start();
+        verticalAnim.start();
     }
 
     private BitmapShader mWaveShader;
@@ -295,7 +299,7 @@ public class WaveView extends View {
         }
         //text
         if (isShowText) {
-            canvas.drawText(currentProgress + "%", mTotalWidth / 2, mTotalHeight / 8 * 7, mtextPaint);
+            canvas.drawText(currentProgress + "%", mTotalWidth / 2, mTotalHeight / 8 * 7, mTextPaint);
         }
     }
 
