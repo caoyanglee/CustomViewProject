@@ -3,7 +3,15 @@ package io.weimu.www;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.weimu.www.helper.StatusBarUtil;
 import io.weimu.www.ui.CircleProgressBarActivity;
@@ -24,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         StatusBarUtil.setColor(this, Color.RED);
     }
-
 
 
     public void itemClick(View v) {
