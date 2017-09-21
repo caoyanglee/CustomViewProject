@@ -21,8 +21,7 @@ public class TestAreaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_area);
-        TextView tv = (TextView) findViewById(R.id.tv);
-        tv.setShadowLayer(5,5,5, Color.rgb(236, 26, 43));
+
 
     }
 
