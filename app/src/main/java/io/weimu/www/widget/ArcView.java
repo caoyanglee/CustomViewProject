@@ -94,10 +94,4 @@ public class ArcView extends View {
         final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
-
-    //字体大小设置
-    public int sp2px(float spValue) {
-        final float fontScale = getContext().getResources().getDisplayMetrics().density;
-        return (int) (spValue * fontScale + 0.5f);
-    }
 }
