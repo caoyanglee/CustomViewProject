@@ -87,6 +87,12 @@
                 android:layout_height="wrap_content"
                 android:onClick="itemClick"
                 android:text="granule grid" />
+            <Button
+                android:id="@+id/btn_arc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="itemClick"
+                android:text="Arc View" />
         </LinearLayout>
     </ScrollView>
 

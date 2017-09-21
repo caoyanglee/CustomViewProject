@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.weimu.www.helper.StatusBarUtil;
+import io.weimu.www.ui.ArcActivity;
 import io.weimu.www.ui.CircleProgressBarActivity;
 import io.weimu.www.ui.FanbarActivity;
 import io.weimu.www.ui.GranuleGridActivity;
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_granule://粒子连线
                 startActivity(GranuleGridActivity.newIntent(this));
+                break;
+            case R.id.btn_arc:
+                startActivity(ArcActivity.newIntent(this));
                 break;
         }
     }
