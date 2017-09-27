@@ -1,0 +1,2 @@
+# CustomViewProject
+Notes of CustomView 
