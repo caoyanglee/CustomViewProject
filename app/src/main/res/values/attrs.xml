@@ -46,4 +46,12 @@
         <attr name="isShowText" format="boolean" /><!--是否显示文本-->
         <attr name="isFanShaped" format="boolean" /><!--是否为扇形-->
     </declare-styleable>
+
+    <declare-styleable name="HotTagView">
+        <attr name="tagText" format="string" />
+        <attr name="tagTextColor" format="color" />
+        <attr name="tagBgColor" format="color" />
+    </declare-styleable>
+
+
 </resources>

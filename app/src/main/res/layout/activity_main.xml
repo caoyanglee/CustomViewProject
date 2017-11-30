@@ -7,93 +7,105 @@
     android:orientation="vertical"
     tools:context="io.weimu.www.MainActivity">
 
-    <ScrollView
-        android:id="@+id/scro_home"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
+    <!--<ScrollView-->
+    <!--android:id="@+id/scro_home"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
 
-            <Button
-                android:id="@+id/btn_test"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="test area" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_test"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="test area" />-->
 
-            <Button
-                android:id="@+id/btn_circle_progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="circleProgressBar" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_circle_progress_bar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="circleProgressBar" />-->
 
-            <Button
-                android:id="@+id/btn_fan_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="fanBar" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_fan_bar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="fanBar" />-->
 
-            <Button
-                android:id="@+id/btn_index_hart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="indexChart" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_index_hart"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="indexChart" />-->
 
-            <Button
-                android:id="@+id/btn_stock_chart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="stockChart" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_stock_chart"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="stockChart" />-->
 
-            <Button
-                android:id="@+id/btn_switch_color_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="switchColorBar" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_switch_color_bar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="switchColorBar" />-->
 
 
-            <Button
-                android:id="@+id/btn_text_with_border"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="textWithBorder" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_text_with_border"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="textWithBorder" />-->
 
-            <Button
-                android:id="@+id/btn_wave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="wave" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_wave"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="wave" />-->
 
-            <Button
-                android:id="@+id/btn_progress_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="progress button" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_progress_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="progress button" />-->
 
-            <Button
-                android:id="@+id/btn_granule"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="granule grid" />
-            <Button
-                android:id="@+id/btn_arc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="itemClick"
-                android:text="Arc View" />
-        </LinearLayout>
-    </ScrollView>
+    <!--<Button-->
+    <!--android:id="@+id/btn_granule"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="granule grid" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/btn_arc"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="Arc View" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/btn_hot_tag"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="itemClick"-->
+    <!--android:text="Hot tag View" />-->
+    <!--</LinearLayout>-->
+    <!--</ScrollView>-->
 
 </LinearLayout>
