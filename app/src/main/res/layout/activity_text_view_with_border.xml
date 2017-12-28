@@ -7,9 +7,9 @@
     tools:context="io.weimu.www.ui.TextViewWithBorderActivity">
 
     <io.weimu.www.widget.TextViewWithBorder
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="这是什么鬼啊，呵呵哒，这是提示哦，看一下"
+        android:text="这是有细微边框的一个TextView!红色边框，分为左上，右下。"
         android:textSize="16sp" />
 </RelativeLayout>
