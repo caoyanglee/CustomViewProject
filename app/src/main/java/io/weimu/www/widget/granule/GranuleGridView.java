@@ -85,7 +85,7 @@ public class GranuleGridView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.rgb(236, 26, 43));
+        canvas.drawColor(Color.rgb(0, 0, 0));
 
         for (int i = 0; i < granuleList.size(); i++) {
             Granule outItem = granuleList.get(i);
@@ -126,7 +126,7 @@ public class GranuleGridView extends View {
 
     //粒子默认配置
     public static class GranuleConfig {
-        static int totalNumber = 20;
+        static int totalNumber = 20;//粒子数量  不要设置太多
         static float defaultSpeed = 1.0f;
         static float variantSpeed = 5.0f;
         static int granuleColor = Color.rgb(255, 255, 255);

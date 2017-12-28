@@ -16,7 +16,6 @@ import kotlin.properties.Delegates
 
 class MainListAdapter : RecyclerView.Adapter<MainListAdapter.Holder>() {
     var dataList: MutableList<String> by Delegates.observable(mutableListOf<String>(), { kProperty, old, new ->
-        Log.e("weimu", "数据已经改变了")
         notifyDataSetChanged()
     })
 

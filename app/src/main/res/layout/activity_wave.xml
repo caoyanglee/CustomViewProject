@@ -8,15 +8,10 @@
 
     <io.weimu.www.widget.WaveView
         android:id="@+id/wave"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true" />
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:visibility="visible" />
 
 
-    <io.weimu.www.widget.WaveViewCustom
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:visibility="gone"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp" />
 </RelativeLayout>

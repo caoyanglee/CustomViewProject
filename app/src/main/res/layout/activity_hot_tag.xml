@@ -8,13 +8,13 @@
 
     <View
         android:id="@+id/view1"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
         android:layout_centerInParent="true"
         android:background="#E5EFF8" />
 
     <io.weimu.www.widget.HotTagView
-        android:layout_width="50dp"
+        android:layout_width="75dp"
         android:layout_height="match_parent"
         android:layout_alignRight="@+id/view1"
         android:layout_alignTop="@+id/view1"

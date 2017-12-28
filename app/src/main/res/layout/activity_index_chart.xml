@@ -7,8 +7,8 @@
     tools:context="io.weimu.www.ui.IndexChartActivity">
 
     <io.weimu.www.widget.IndexChart
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:layout_centerInParent="true" />
 
     <io.weimu.www.widget.GradientProgressBar

@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         data.add("test")//测试专用
         data.add("circle_progress_bar")
         data.add("fan_bar")
-        data.add("index_hart")
+        data.add("index_chart")
         data.add("stock_chart")
         data.add("switch_color_bar")
         data.add("text_with_border")
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 "test" -> startActivity(TestAreaActivity.newIntent(this))//测试专用
                 "circle_progress_bar" -> startActivity(CircleProgressBarActivity.newIntent(this))
                 "fan_bar" -> startActivity(FanbarActivity.newIntent(this))
-                "index_hart" -> startActivity(IndexChartActivity.newIntent(this))
+                "index_chart" -> startActivity(IndexChartActivity.newIntent(this))
                 "stock_chart" -> startActivity(StockChartActivity.newIntent(this))
                 "switch_color_bar" -> startActivity(SwitchColorBarActivity.newIntent(this))
                 "text_with_border" -> startActivity(TextViewWithBorderActivity.newIntent(this))

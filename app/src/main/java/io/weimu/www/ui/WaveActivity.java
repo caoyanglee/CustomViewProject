@@ -25,6 +25,8 @@ public class WaveActivity extends AppCompatActivity {
 
         final WaveView wave = (WaveView) findViewById(R.id.wave);
         wave.setCurrentProgress(50);
+        wave.setBorderStyle(WaveView.BORDER.CIRCLE);
+
 
 
         wave.setOnClickListener(new View.OnClickListener() {

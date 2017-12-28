@@ -9,5 +9,9 @@
 
     <io.weimu.www.widget.ArcView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="200dp"
+        app:anim_duration="1000"
+        app:color="@color/colorPrimary"
+        app:direction="bottom"
+        app:start_anim="true" />
 </LinearLayout>

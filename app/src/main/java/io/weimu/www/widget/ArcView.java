@@ -2,15 +2,20 @@ package io.weimu.www.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+
+import io.weimu.www.R;
 
 /**
  * @author 艹羊
@@ -32,8 +37,20 @@ public class ArcView extends View {
 
     public ArcView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initAttrs(context, attrs, defStyleAttr);
         init();
     }
+
+
+    private enum DIRECTION {
+        TOP, BOTTOM, LEFT, RIGHT
+    }
+
+    private DIRECTION direction = DIRECTION.TOP;//半圆的朝向
+    private int color = Color.rgb(80, 188, 252);
+    private boolean startAnim = false;
+    private long animTime = 3000;//动画时间-毫秒
+
 
     private ValueAnimator valueAnimator;
 
@@ -41,11 +58,11 @@ public class ArcView extends View {
 
     private Path mPath;
 
-    private Point P0,P1,P2;
+    private Point P0, P1, P2;
 
     private void init() {
         testP = new Paint();
-        testP.setColor(Color.rgb(80, 188, 252));
+        testP.setColor(color);
         testP.setStrokeWidth(dip2px(1));
         testP.setStyle(Paint.Style.FILL);
         testP.setAntiAlias(true);
@@ -57,28 +74,66 @@ public class ArcView extends View {
         P2 = new Point();
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        setMeasuredDimension(widthSize, heightSize);
+
+    private void initAttrs(Context context, AttributeSet attrs, int defStyleAttr) {
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ArcView, defStyleAttr, 0);
+        int directionStr = a.getInt(R.styleable.ArcView_direction, 0);
+        switch (directionStr) {
+            case 0:
+                direction = DIRECTION.TOP;
+                break;
+            case 1:
+                direction = DIRECTION.BOTTOM;
+                break;
+            case 2:
+                direction = DIRECTION.LEFT;
+                break;
+            case 3:
+                direction = DIRECTION.RIGHT;
+                break;
+        }
+        color = a.getColor(R.styleable.ArcView_color, color);
+        startAnim = a.getBoolean(R.styleable.ArcView_start_anim, false);
+        animTime = a.getInt(R.styleable.ArcView_anim_duration, 3000);
+
+        a.recycle();
     }
 
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        P0.set(0,0);
-        P1.set(w / 2, h * 2);
-        P2.set(w,0);
-        beginAnim();
+        Log.e("weimu", "宽=" + w + " 高=" + h);
+        switch (direction) {
+            case TOP:
+                P0.set(0, h);
+                P1.set(w / 2, -h);
+                P2.set(w, h);
+                break;
+            case BOTTOM:
+                P0.set(0, 0);
+                P1.set(w / 2, h * 2);
+                P2.set(w, 0);
+                break;
+            case LEFT:
+                P0.set(w, 0);
+                P1.set(-w, h / 2);
+                P2.set(w, h);
+                break;
+            case RIGHT:
+                P0.set(0, 0);
+                P1.set(w * 2, h / 2);
+                P2.set(0, h);
+                break;
+
+        }
+        if (startAnim) beginAnim();
     }
 
     private void beginAnim() {
         if (valueAnimator != null) valueAnimator.cancel();
         valueAnimator = ValueAnimator.ofFloat(0, 1);
-        valueAnimator.setDuration(3000);
+        valueAnimator.setDuration(animTime);
         valueAnimator.setRepeatCount(0);
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

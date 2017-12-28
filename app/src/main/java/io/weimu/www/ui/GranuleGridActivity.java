@@ -21,6 +21,6 @@ public class GranuleGridActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_granule_grid);
         GranuleGridView ggv = (GranuleGridView) findViewById(R.id.ggv);
-        ggv.setGranuleNumber(20);
+        ggv.setGranuleNumber(50);
     }
 }

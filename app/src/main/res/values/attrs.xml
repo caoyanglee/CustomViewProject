@@ -54,4 +54,17 @@
     </declare-styleable>
 
 
+    <declare-styleable name="ArcView">
+        <attr name="direction" format="enum">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="left" value="2" />
+            <enum name="right" value="3" />
+        </attr>
+        <attr name="color" format="color" />
+        <attr name="start_anim" format="boolean" />
+        <attr name="anim_duration" format="integer" />
+    </declare-styleable>
+
+
 </resources>
