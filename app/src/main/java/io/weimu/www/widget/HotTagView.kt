@@ -56,6 +56,7 @@ class HotTagView : View {
 
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        //获取测量模式
         val wMode = View.MeasureSpec.getMode(widthMeasureSpec)
         //获取测量大小
         var wSize = View.MeasureSpec.getSize(widthMeasureSpec)
