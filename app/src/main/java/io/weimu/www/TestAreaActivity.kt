@@ -7,6 +7,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 
+/**
+ * 测试 区域 代码
+ * Test Area Code
+ */
 class TestAreaActivity : AppCompatActivity() {
 
 
