@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<io.weimu.www.widget.BlockLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     tools:context="io.weimu.www.TestAreaActivity">
 
-    <View
-        android:id="@+id/view1"
-        android:layout_width="200dp"
+    <TextView
+        android:id="@+id/view_back"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
-        android:background="#E5EFF8" />
+        android:background="#E5EFF8"
+        android:text="发简历看电视剧废了解但是里附近发"
+        android:textSize="16sp" />
 
     <io.weimu.www.widget.HotTagView
-        android:layout_width="50dp"
+        android:id="@+id/hot_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignRight="@+id/view1"
-        android:layout_alignTop="@+id/view1"
         app:tagBgColor="#FB6A3B"
         app:tagText="限时免费"
         app:tagTextColor="#ffffff"
 
         />
-</RelativeLayout>
+</io.weimu.www.widget.BlockLayout>

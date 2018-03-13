@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         data.add("progress_button")//倒计时按钮
         data.add("granule")//粒子连线
         data.add("arc")
-        data.add("hot_tag")
+        data.add("hot_tag")//热门标签
+        data.add("horizontal_auto_scroll_bgView")//横向自动滚动背景图
 
         adapter.dataList = data
 
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                 "granule" -> startActivity(GranuleGridActivity.newIntent(this))//粒子连线
                 "arc" -> startActivity(ArcActivity.newIntent(this))//曲线图片
                 "hot_tag" -> startActivity(HotTagActivity.newIntent(this))
+                "horizontal_auto_scroll_bgView" -> startActivity(BgViewActivity.newIntent(this))
             }
         }
     }

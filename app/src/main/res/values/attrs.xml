@@ -66,5 +66,10 @@
         <attr name="anim_duration" format="integer" />
     </declare-styleable>
 
+    <!--横向自动滚动背景图-->
+    <declare-styleable name="HorizontalAutoScrollBgView">
+        <attr name="src" format="reference" />
+    </declare-styleable>
+
 
 </resources>

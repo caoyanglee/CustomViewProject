@@ -56,6 +56,7 @@ class HotTagView : View {
 
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+
         //获取测量模式
         val wMode = View.MeasureSpec.getMode(widthMeasureSpec)
         //获取测量大小
@@ -69,13 +70,11 @@ class HotTagView : View {
         tagWidth = Math.sqrt(Math.pow((viewWidth / 2).toDouble(), 2.0) / 2).toFloat()
         textPaint.textSize = tagWidth / 2
         //强制设置view为方形
-
         setMeasuredDimension(wSize, wSize)
-    }
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        Log.e("weimu", "onSizeChanged   宽度=$w 高度=$h")
+        //获取测量模式
+        if (wMode == MeasureSpec.EXACTLY) Log.e("weimu", "HotTagView onMeasure 模式：EXACTLY")
+        if (wMode == MeasureSpec.AT_MOST) Log.e("weimu", "HotTagView onMeasure 模式：AT_MOST")
+        if (wMode == MeasureSpec.UNSPECIFIED) Log.e("weimu", "HotTagView onMeasure 模式：UNSPECIFIED")
     }
 
 
