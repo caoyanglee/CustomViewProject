@@ -2,11 +2,9 @@ package io.weimu.www
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_test_area.*
 
 /**
@@ -25,9 +23,10 @@ class TestAreaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_area)
+        pwdView.setOnInputFinishListener {
 
-        val params = view_back.layoutParams
-        Log.e("caoyanglee", "宽度=${params.width} 高度=${params.height}")
+            Toast.makeText(this, "完成输入 $it", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
