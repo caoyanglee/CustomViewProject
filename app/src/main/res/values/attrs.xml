@@ -51,6 +51,10 @@
         <attr name="tagText" format="string" />
         <attr name="tagTextColor" format="color" />
         <attr name="tagBgColor" format="color" />
+        <attr name="position" format="enum">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+        </attr>
     </declare-styleable>
 
 

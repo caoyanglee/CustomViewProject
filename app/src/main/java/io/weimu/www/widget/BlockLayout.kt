@@ -23,16 +23,18 @@ class BlockLayout : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
         //获取测量模式
-        val wMode = View.MeasureSpec.getMode(widthMeasureSpec)
-        if (wMode==MeasureSpec.EXACTLY) Log.e("weimu", "BlockLayout onMeasure 模式：EXACTLY")
-        if (wMode==MeasureSpec.AT_MOST) Log.e("weimu", "BlockLayout onMeasure 模式：AT_MOST")
-        if (wMode==MeasureSpec.UNSPECIFIED) Log.e("weimu", "BlockLayout onMeasure 模式：UNSPECIFIED")
+        val wMode = MeasureSpec.getMode(widthMeasureSpec)
+        Log.e("weimu", "onMeasure  ==========================")
+        if (wMode == MeasureSpec.EXACTLY) Log.e("weimu", "BlockLayout onMeasure 模式：EXACTLY")
+        if (wMode == MeasureSpec.AT_MOST) Log.e("weimu", "BlockLayout onMeasure 模式：AT_MOST")
+        if (wMode == MeasureSpec.UNSPECIFIED) Log.e("weimu", "BlockLayout onMeasure 模式：UNSPECIFIED")
 
         //获取测量大小
-        val wSize = View.MeasureSpec.getSize(widthMeasureSpec)
+        val wSize = MeasureSpec.getSize(widthMeasureSpec)
 
-//        Log.e("weimu", "onMeasure   模式=$wMode 宽度=$wSize")
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        Log.e("weimu", "onMeasure   模式=$wMode 宽度=$wSize")
     }
 }

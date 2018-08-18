@@ -23,10 +23,7 @@ class TestAreaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_area)
-        pwdView.setOnInputFinishListener {
 
-            Toast.makeText(this, "完成输入 $it", Toast.LENGTH_SHORT).show()
-        }
     }
 
 

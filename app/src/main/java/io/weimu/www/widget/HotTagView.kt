@@ -15,9 +15,10 @@ import io.weimu.www.R
  * Date:2017/11/30 10:20
  * Description:热门标签
  */
-
-
 class HotTagView : View {
+    val POSITION_LEFT = 1;
+    val POSITION_RIGHT = 2;
+
     private var viewWidth: Float = 0f
     private var tagWidth = 0f//标签的宽度
     private var tagPath: Path = Path()
@@ -29,6 +30,7 @@ class HotTagView : View {
     private var tagText = "限时免费"
     private var tegTextColor = Color.WHITE
     private var tagBgColor = Color.RED
+    private var position = POSITION_LEFT
 
 
     constructor(context: Context) : this(context, null)
@@ -41,6 +43,7 @@ class HotTagView : View {
         tagText = (a.getString(R.styleable.HotTagView_tagText)) ?: "限时免费"
         tegTextColor = a.getColor(R.styleable.HotTagView_tagTextColor, Color.WHITE)
         tagBgColor = a.getColor(R.styleable.HotTagView_tagBgColor, Color.RED)
+        position=a.getInt(R.styleable.HotTagView_position, POSITION_LEFT)
         a.recycle()
 
         //初始化画笔
@@ -83,16 +86,32 @@ class HotTagView : View {
         val center = (viewWidth / 2).toFloat();
         tagPath.reset()
 
-        tagPath.moveTo(0f, 0f)
-        tagPath.lineTo(center, 0f);
-        tagPath.lineTo(viewWidth, center)
-        tagPath.lineTo(viewWidth, viewWidth)
-        tagPath.close()
 
-        canvas?.drawPath(tagPath, tagPaint)
-        canvas?.rotate(45f, center, center)
-        canvas?.drawText(tagText, center, center - tagWidth / 3, textPaint)
-        canvas?.rotate(-45f, center, center)
+        if (position == POSITION_LEFT) {
+            tagPath.moveTo(viewWidth,0f)
+            tagPath.lineTo(center,0f)
+            tagPath.lineTo(0f,center)
+            tagPath.lineTo(0f,viewWidth)
+            tagPath.close()
+
+            canvas?.drawPath(tagPath, tagPaint)
+            canvas?.rotate(-45f, center, center)
+            canvas?.drawText(tagText, center, center - tagWidth / 3, textPaint)
+            canvas?.rotate(45f, center, center)
+        } else {
+            tagPath.moveTo(0f, 0f)
+            tagPath.lineTo(center, 0f);
+            tagPath.lineTo(viewWidth, center)
+            tagPath.lineTo(viewWidth, viewWidth)
+            tagPath.close()
+
+            canvas?.drawPath(tagPath, tagPaint)
+            canvas?.rotate(45f, center, center)
+            canvas?.drawText(tagText, center, center - tagWidth / 3, textPaint)
+            canvas?.rotate(-45f, center, center)
+        }
+
+
     }
 
 

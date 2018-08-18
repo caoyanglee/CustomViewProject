@@ -4,17 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5C40C2"
     android:clipChildren="false"
     android:clipToPadding="false"
     tools:context="io.weimu.www.TestAreaActivity">
 
-    <io.weimu.www.widget.pwd.PayPwdView
-        android:id="@+id/pwdView"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="visible" />
-
+    <io.weimu.www.widget.BlockLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#5C40C2" />
 
 </RelativeLayout>
