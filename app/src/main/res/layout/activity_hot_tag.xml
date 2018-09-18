@@ -14,13 +14,15 @@
         android:background="#E5EFF8" />
 
     <io.weimu.www.widget.HotTagView
-        android:layout_width="75dp"
+        android:id="@+id/hotTag"
+        android:layout_width="80dp"
         android:layout_height="match_parent"
         android:layout_alignLeft="@+id/view1"
         android:layout_alignTop="@+id/view1"
         app:tagBgColor="#FB6A3B"
-        app:tagText="限时免费"
+        app:tagText="热卖标签"
         app:tagTextColor="#ffffff"
         app:position="left"
+        app:triangle="false"
         />
 </RelativeLayout>

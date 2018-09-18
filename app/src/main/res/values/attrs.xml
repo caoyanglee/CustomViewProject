@@ -55,6 +55,7 @@
             <enum name="left" value="1" />
             <enum name="right" value="2" />
         </attr>
+        <attr name="triangle" format="boolean" />
     </declare-styleable>
 
 
@@ -75,5 +76,23 @@
         <attr name="src" format="reference" />
     </declare-styleable>
 
+
+    <declare-styleable name="SimpleButton">
+        <attr name="wm_backgroundColor" format="color" />
+        <attr name="wm_backgroundPressColor" format="color" />
+        <attr name="wm_backgroundUnEnableColor" format="color" />
+        <attr name="wm_cornerRadius" format="dimension" />
+        <attr name="wm_strokeWidth" format="dimension" />
+        <attr name="wm_strokeColor" format="color" />
+        <attr name="wm_strokePressColor" format="color" />
+        <attr name="wm_strokeUnEnableColor" format="color" />
+        <attr name="wm_cornerRadius_TL" format="dimension" />
+        <attr name="wm_cornerRadius_TR" format="dimension" />
+        <attr name="wm_cornerRadius_BL" format="dimension" />
+        <attr name="wm_cornerRadius_BR" format="dimension" />
+        <attr name="wm_textColor" format="color" />
+        <attr name="wm_textPressColor" format="color" />
+        <attr name="wm_textUnEnableColor" format="color" />
+    </declare-styleable>
 
 </resources>

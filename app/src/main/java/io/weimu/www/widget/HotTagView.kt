@@ -27,10 +27,11 @@ class HotTagView : View {
 
 
     //自定义属性
-    private var tagText = "限时免费"
-    private var tegTextColor = Color.WHITE
-    private var tagBgColor = Color.RED
-    private var position = POSITION_LEFT
+    var tagText = "限时免费"
+    var tegTextColor = Color.WHITE
+    var tagBgColor = Color.RED
+    var position = POSITION_LEFT
+    var triangle = false//是否为三角形
 
 
     constructor(context: Context) : this(context, null)
@@ -43,7 +44,8 @@ class HotTagView : View {
         tagText = (a.getString(R.styleable.HotTagView_tagText)) ?: "限时免费"
         tegTextColor = a.getColor(R.styleable.HotTagView_tagTextColor, Color.WHITE)
         tagBgColor = a.getColor(R.styleable.HotTagView_tagBgColor, Color.RED)
-        position=a.getInt(R.styleable.HotTagView_position, POSITION_LEFT)
+        position = a.getInt(R.styleable.HotTagView_position, POSITION_LEFT)
+        triangle = a.getBoolean(R.styleable.HotTagView_triangle, false)
         a.recycle()
 
         //初始化画笔
@@ -66,12 +68,35 @@ class HotTagView : View {
         var wSize = View.MeasureSpec.getSize(widthMeasureSpec)
 
         if (wMode == MeasureSpec.AT_MOST)
-            wSize = dip2px(80f)
+            wSize = dip2px(80f).toInt()
 
         viewWidth = wSize.toFloat()
         //计算得出标签的宽度
         tagWidth = Math.sqrt(Math.pow((viewWidth / 2).toDouble(), 2.0) / 2).toFloat()
-        textPaint.textSize = tagWidth / 2
+
+        if (triangle) {
+            when (tagText.length) {
+                1 -> {
+                    textPaint.textSize = tagWidth
+                }
+                2 -> {
+                    textPaint.textSize = tagWidth * 3 / 4
+                }
+                3 -> {
+                    textPaint.textSize = tagWidth * 3 / 4
+                }
+                4 -> {
+                    textPaint.textSize = tagWidth / 2
+                }
+                else -> {
+                    textPaint.textSize = tagWidth / 2
+                }
+            }
+        } else {
+            textPaint.textSize = tagWidth / 2
+        }
+
+
         //强制设置view为方形
         setMeasuredDimension(wSize, wSize)
         //获取测量模式
@@ -86,29 +111,55 @@ class HotTagView : View {
         val center = (viewWidth / 2).toFloat();
         tagPath.reset()
 
+        if (triangle) {
+            //三角形
+            if (position == POSITION_LEFT) {
+                tagPath.moveTo(viewWidth, 0f)
+                tagPath.lineTo(0f, 0f)
+                tagPath.lineTo(0f, viewWidth)
+                tagPath.close()
 
-        if (position == POSITION_LEFT) {
-            tagPath.moveTo(viewWidth,0f)
-            tagPath.lineTo(center,0f)
-            tagPath.lineTo(0f,center)
-            tagPath.lineTo(0f,viewWidth)
-            tagPath.close()
+                canvas?.drawPath(tagPath, tagPaint)
+                canvas?.rotate(-45f, center, center)
+                canvas?.drawText(tagText, center, center - tagWidth / 3, textPaint)
+                canvas?.rotate(45f, center, center)
+            } else {
 
-            canvas?.drawPath(tagPath, tagPaint)
-            canvas?.rotate(-45f, center, center)
-            canvas?.drawText(tagText, center, center - tagWidth / 3, textPaint)
-            canvas?.rotate(45f, center, center)
+                tagPath.moveTo(0f, 0f)
+                tagPath.lineTo(0f, viewWidth)
+                tagPath.lineTo(viewWidth, viewWidth)
+                tagPath.close()
+
+                canvas?.drawPath(tagPath, tagPaint)
+                canvas?.rotate(45f, center, center)
+                canvas?.drawText(tagText, center, center - tagWidth / 3, textPaint)
+                canvas?.rotate(-45f, center, center)
+            }
         } else {
-            tagPath.moveTo(0f, 0f)
-            tagPath.lineTo(center, 0f);
-            tagPath.lineTo(viewWidth, center)
-            tagPath.lineTo(viewWidth, viewWidth)
-            tagPath.close()
+            //条形
+            if (position == POSITION_LEFT) {
+                tagPath.moveTo(viewWidth, 0f)
+                tagPath.lineTo(center, 0f)
+                tagPath.lineTo(0f, center)
+                tagPath.lineTo(0f, viewWidth)
+                tagPath.close()
 
-            canvas?.drawPath(tagPath, tagPaint)
-            canvas?.rotate(45f, center, center)
-            canvas?.drawText(tagText, center, center - tagWidth / 3, textPaint)
-            canvas?.rotate(-45f, center, center)
+                canvas?.drawPath(tagPath, tagPaint)
+                canvas?.rotate(-45f, center, center)
+                canvas?.drawText(tagText, center, center - tagWidth / 3, textPaint)
+                canvas?.rotate(45f, center, center)
+            } else {
+                tagPath.moveTo(0f, 0f)
+                tagPath.lineTo(center, 0f);
+                tagPath.lineTo(viewWidth, center)
+                tagPath.lineTo(viewWidth, viewWidth)
+                tagPath.close()
+
+                canvas?.drawPath(tagPath, tagPaint)
+                canvas?.rotate(45f, center, center)
+                canvas?.drawText(tagText, center, center - tagWidth / 3, textPaint)
+                canvas?.rotate(-45f, center, center)
+            }
         }
 
 
@@ -116,8 +167,8 @@ class HotTagView : View {
 
 
     //dp2px
-    fun dip2px(dpValue: Float) = (dpValue * context.resources.displayMetrics.density + 0.5f).toInt()
+    fun dip2px(dpValue: Float) = (dpValue * context.resources.displayMetrics.density + 0.5f)
 
     //sp2px
-    fun sp2px(spValue: Float) = (spValue * context.resources.displayMetrics.density + 0.5f).toInt()
+    fun sp2px(spValue: Float) = (spValue * context.resources.displayMetrics.density + 0.5f)
 }
