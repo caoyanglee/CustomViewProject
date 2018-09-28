@@ -77,7 +77,8 @@
     </declare-styleable>
 
 
-    <declare-styleable name="SimpleButton">
+    <!--简单按钮-->
+    <declare-styleable name="SimpleView">
         <attr name="wm_backgroundColor" format="color" />
         <attr name="wm_backgroundPressColor" format="color" />
         <attr name="wm_backgroundUnEnableColor" format="color" />
@@ -93,6 +94,20 @@
         <attr name="wm_textColor" format="color" />
         <attr name="wm_textPressColor" format="color" />
         <attr name="wm_textUnEnableColor" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SectionItemView">
+        <attr name="wm_key" format="string" />
+        <attr name="wm_hint" format="string" />
+        <attr name="wm_content" format="string" />
+        <attr name="wm_important" format="boolean" />
+        <attr name="wm_showArrow" format="boolean" />
+        <attr name="wm_canInput" format="boolean" />
+        <attr name="wm_inputType" format="enum">
+            <enum name="text" value="0" />
+            <enum name="textPassword" value="1" />
+        </attr>
     </declare-styleable>
 
 </resources>

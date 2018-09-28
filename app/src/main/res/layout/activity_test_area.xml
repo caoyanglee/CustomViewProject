@@ -1,33 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="io.weimu.www.TestAreaActivity">
 
-    <io.weimu.www.widget.SimpleButton
-        android:id="@+id/simpleButton"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:clickable="true"
-        android:enabled="false"
-        android:text="测试信号"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:wm_backgroundUnEnableColor="#979797"
-        app:wm_backgroundColor="#31429D"
-        app:wm_backgroundPressColor="#FFB938"
-        app:wm_cornerRadius_BR="25dp"
-        app:wm_cornerRadius_TL="25dp"
-        app:wm_strokeColor="#763CA2"
-        app:wm_strokePressColor="#178BEC"
-        app:wm_strokeWidth="1dp"
-        app:wm_textUnEnableColor="@color/red_tiny"
-        app:wm_textColor="@color/white"
-        app:wm_textPressColor="#9A9A9A" />
+    <io.weimu.www.widget.sectionitem.SectionItemView
+        android:id="@+id/siv_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:wm_hint="请输入账号"
+        app:wm_key="账号："
+        app:wm_showArrow="false" />
 
-</android.support.constraint.ConstraintLayout>
+
+    <io.weimu.www.widget.sectionitem.SectionItemView
+        android:id="@+id/siv_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:wm_hint="请输入密码"
+        app:wm_inputType="textPassword"
+        app:wm_key="密码："
+        app:wm_showArrow="false" />
+
+    <io.weimu.www.widget.sectionitem.SectionItemView
+        android:id="@+id/siv_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:wm_hint="请输入昵称"
+        app:wm_important="false"
+        app:wm_key="昵称："
+        app:wm_showArrow="false" />
+
+    <io.weimu.www.widget.sectionitem.SectionItemView
+        android:id="@+id/siv_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:wm_canInput="false"
+        android:descendantFocusability="blocksDescendants"
+        app:wm_content="杭州"
+        app:wm_hint="请选择城市"
+        app:wm_important="false"
+        app:wm_key="城市："
+        app:wm_showArrow="true" />
+
+
+    <io.weimu.www.widget.SimpleView
+        android:id="@+id/btn_test"
+        android:layout_width="120dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="测试按钮"
+        android:textSize="16sp"
+        app:wm_backgroundColor="#FC464A"
+        app:wm_backgroundPressColor="#8dFC464A"
+        app:wm_cornerRadius="4dp"
+        app:wm_textColor="#ffffff" />
+
+
+</android.support.v7.widget.LinearLayoutCompat>

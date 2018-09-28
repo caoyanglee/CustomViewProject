@@ -113,4 +113,9 @@
     <color name="appDivider">#26000000</color>
 
     <color name="shadow_color">#99C1B087</color>
+
+
+    <!--统一按钮颜色-->
+    <color name="btn_bg_d">#FFBD04</color>
+    <color name="btn_bg_p">#3399e0</color>
 </resources>
