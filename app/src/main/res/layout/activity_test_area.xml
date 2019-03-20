@@ -60,5 +60,8 @@
         app:wm_cornerRadius="4dp"
         app:wm_textColor="#ffffff" />
 
+    <io.weimu.www.widget.pwd.PayPwdView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </android.support.v7.widget.LinearLayoutCompat>

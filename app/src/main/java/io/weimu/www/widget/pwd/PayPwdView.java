@@ -63,6 +63,8 @@ public class PayPwdView extends FrameLayout {
         etPwd.setBackground(null);
         etPwd.setAlpha(0);
         etPwd.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);//必须放在addView后面
+        etPwd.setCursorVisible(false);
+        etPwd.setLongClickable(false);
         etPwd.addTextChangedListener(new MyTextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {

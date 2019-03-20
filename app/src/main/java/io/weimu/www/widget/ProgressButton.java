@@ -78,7 +78,6 @@ public class ProgressButton extends View {
         textP.setAntiAlias(true);
         textP.setStyle(Paint.Style.FILL);
         textP.setTextAlign(Paint.Align.CENTER);
-        textP.setAntiAlias(true);
     }
 
     @Override

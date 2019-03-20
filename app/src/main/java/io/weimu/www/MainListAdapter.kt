@@ -15,9 +15,14 @@ import kotlin.properties.Delegates
  */
 
 class MainListAdapter : RecyclerView.Adapter<MainListAdapter.Holder>() {
-    var dataList: MutableList<String> by Delegates.observable(mutableListOf<String>(), { kProperty, old, new ->
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        val targetView = from(parent.context).inflate(getItemLayoutRes(), parent, false)
+        return Holder(targetView)
+    }
+
+    var dataList: MutableList<String> by Delegates.observable(mutableListOf<String>()) { kProperty, old, new ->
         notifyDataSetChanged()
-    })
+    }
 
     var onItemClickListener: ((text: String, position: Int) -> Unit)? = null
 
@@ -25,11 +30,6 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.Holder>() {
 
     private fun getItemLayoutRes(): Int = R.layout.list_item_main
 
-
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
-        val targetView = from(parent?.context).inflate(getItemLayoutRes(), parent, false)
-        return Holder(targetView)
-    }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val tv = holder.itemView.tv
