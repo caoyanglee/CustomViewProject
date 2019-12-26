@@ -1,11 +1,10 @@
 package io.weimu.www
 
-import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.view.LayoutInflater.*
+import android.view.LayoutInflater.from
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.list_item_main.view.*
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_switch_color_bar.view.*
 import kotlin.properties.Delegates
 
 /**
@@ -40,6 +39,6 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.Holder>() {
 
     }
 
-    class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView)
+    class Holder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }

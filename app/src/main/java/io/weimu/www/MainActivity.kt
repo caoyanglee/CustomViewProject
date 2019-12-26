@@ -1,8 +1,8 @@
 package io.weimu.www
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.weimu.www.ui.*
 import kotlinx.android.synthetic.main.activity_main.*
 

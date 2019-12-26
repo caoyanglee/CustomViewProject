@@ -2,8 +2,8 @@ package io.weimu.www.ui
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import io.weimu.www.R
 import kotlinx.android.synthetic.main.activity_hot_tag.*
 

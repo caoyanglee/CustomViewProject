@@ -1,6 +1,7 @@
 package io.weimu.www.bean;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author 艹羊

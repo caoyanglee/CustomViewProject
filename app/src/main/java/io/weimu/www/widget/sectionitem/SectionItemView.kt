@@ -2,7 +2,6 @@ package io.weimu.www.widget.sectionitem
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.widget.LinearLayoutCompat
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
@@ -12,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.LinearLayoutCompat
 import io.weimu.www.R
 
 /**

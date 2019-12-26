@@ -3,8 +3,9 @@ package io.weimu.www.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import io.weimu.www.R;
 import io.weimu.www.widget.CircleProgressBarView;
