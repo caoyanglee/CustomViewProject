@@ -21,7 +21,7 @@ class CurveAy : AppCompatActivity() {
         setContentView(R.layout.activity_curve_ay)
 
 
-        mCurve.interpolator = EaseCubicInterpolator(0.17f, 0.67f, 0.85f, -0.55f)
+        mCurve.interpolator = EaseCubicInterpolator(1f, 0f, 1f, 0f)
 
         btnTest.setOnClickListener {
             mCurve.interpolator = EaseCubicInterpolator(

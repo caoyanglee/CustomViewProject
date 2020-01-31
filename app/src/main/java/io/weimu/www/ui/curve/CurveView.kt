@@ -4,11 +4,13 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Path
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.view.animation.Interpolator
 import kotlin.math.min
+
 
 /**
  * Author:你需要一台永动机
@@ -41,7 +43,7 @@ class CurveView : View {
     private val curvePaint: Paint by lazy {
         Paint().apply {
             this.isAntiAlias = true
-            this.style = Paint.Style.FILL
+            this.style = Paint.Style.STROKE
             this.color = Color.BLACK
             this.strokeWidth = dip2px(4f).toFloat()
         }
@@ -55,6 +57,9 @@ class CurveView : View {
             this.textAlign = Paint.Align.RIGHT
         }
     }
+
+
+    private val path = Path()
 
     constructor(context: Context) : this(context, null)
 
@@ -133,12 +138,18 @@ class CurveView : View {
         if (interpolator != null) {
             //画具体的曲线
             curvePaint.color = Color.BLACK
+            path.reset()
             for (idx in 0..widthSize) {
                 val x = idx.toFloat()
                 val y = interpolator!!.getInterpolation(idx.toFloat() / widthSize) * heightSize
-                canvas.drawPoint(x, heightSize - y, curvePaint)
+
+                if (idx==0)
+                    path.moveTo(x, heightSize - y)
+                else
+                    path.lineTo(x, heightSize - y)
                 Log.e("pmm", "x=$x y=$y")
             }
+            canvas.drawPath(path, curvePaint);
         }
 
 
