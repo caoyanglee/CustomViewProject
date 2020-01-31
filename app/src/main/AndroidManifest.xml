@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.curve.CurveAy"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +29,7 @@
         <activity android:name=".ui.GranuleGridActivity" />
         <activity android:name=".ui.ArcActivity" />
         <activity android:name=".ui.HotTagActivity" />
-        <activity android:name=".ui.BgViewActivity"></activity>
+        <activity android:name=".ui.BgViewActivity" />
     </application>
 
 </manifest>

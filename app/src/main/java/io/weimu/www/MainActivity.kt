@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.weimu.www.ui.*
+import io.weimu.www.ui.curve.CurveAy
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         data.add("arc")
         data.add("hot_tag")//热门标签
         data.add("horizontal_auto_scroll_bgView")//横向自动滚动背景图
+        data.add("curve")//曲线
 
         adapter.dataList = data
 
@@ -49,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                 "arc" -> startActivity(ArcActivity.newIntent(this))//曲线图片
                 "hot_tag" -> startActivity(HotTagActivity.newIntent(this))
                 "horizontal_auto_scroll_bgView" -> startActivity(BgViewActivity.newIntent(this))
+                "curve" -> startActivity(CurveAy.newIntent(this))
             }
         }
     }
