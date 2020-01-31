@@ -13,7 +13,7 @@ import kotlin.math.min
 /**
  * Author:你需要一台永动机
  * Date:2020-01-31 20:24
- * Description:
+ * Description:曲线视图
  */
 class CurveView : View {
 
