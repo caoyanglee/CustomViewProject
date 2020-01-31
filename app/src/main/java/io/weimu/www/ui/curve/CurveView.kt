@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.animation.Interpolator
 import kotlin.math.min
@@ -24,6 +23,8 @@ class CurveView : View {
 
     private var heightSize = 0
     private var heightFactor = 0//高度因子 总高度/5
+
+    private var padding = dip2px(4f)
 
     var interpolator: Interpolator? = null
         set(value) {
@@ -86,9 +87,9 @@ class CurveView : View {
 
     //处理高度宽度问题
     private fun resolveWidthHeight(w: Int, h: Int) {
-        widthSize = w
+        widthSize = w - padding * 2
         widthFactor = widthSize / 5
-        heightSize = h
+        heightSize = h - padding * 2
         heightFactor = heightSize / 5
         setMeasuredDimension(min(widthSize, heightSize), min(widthSize, heightSize))
     }
@@ -96,14 +97,29 @@ class CurveView : View {
     override fun onDraw(canvas: Canvas?) {
         if (canvas == null) return
 
-        //画基础先
+        val ltX = padding.toFloat()
+        val ltY = padding.toFloat()
+
+        val lbX = padding.toFloat()
+        val lbY = heightSize + padding.toFloat()
+
+        val rtX = widthSize + padding.toFloat()
+        val rtY = padding.toFloat()
+
+        val rbX = widthSize + padding.toFloat()
+        val rbY = heightSize + padding.toFloat()
+
+
+        val paddingGap = padding.toFloat()
+
+        //画基础线
         borderPaint.color = Color.BLACK
-        canvas.drawLine(0f, 0f, 0f, heightSize.toFloat(), borderPaint)
+        canvas.drawLine(ltX, ltY, lbX, lbY, borderPaint)
         canvas.drawLine(
-            0f,
-            heightSize.toFloat(),
-            widthSize.toFloat(),
-            heightSize.toFloat(),
+            lbX,
+            lbY,
+            rbX,
+            rbY,
             borderPaint
         )
 
@@ -112,20 +128,20 @@ class CurveView : View {
         for (idx in 1 until 5) {
             val curX = widthFactor * idx
             //竖线
-            canvas.drawLine(curX.toFloat(), 0f, curX.toFloat(), heightSize.toFloat(), borderPaint)
+            canvas.drawLine(paddingGap+curX.toFloat(), paddingGap, paddingGap+curX.toFloat(), paddingGap+heightSize.toFloat(), borderPaint)
 
             val curY = heightFactor * idx
             //横线
-            canvas.drawLine(0f, curY.toFloat(), widthSize.toFloat(), curY.toFloat(), borderPaint)
+            canvas.drawLine(paddingGap, paddingGap+curY.toFloat(), paddingGap+widthSize.toFloat(), paddingGap+curY.toFloat(), borderPaint)
         }
 
         //画字
         textPaint.textAlign = Paint.Align.RIGHT
-        canvas.drawText("时间", widthSize.toFloat(), heightSize.toFloat() - dip2px(8f), textPaint)
+        canvas.drawText("时间", paddingGap+widthSize.toFloat(), paddingGap+heightSize.toFloat() - dip2px(8f), textPaint)
 
         textPaint.textAlign = Paint.Align.LEFT
-        val text2X= dip2px(16f).toFloat()
-        val text2Y=dip2px(32f).toFloat()
+        val text2X = paddingGap+dip2px(16f).toFloat()
+        val text2Y = paddingGap+dip2px(32f).toFloat()
         canvas.rotate(-90f, text2X, text2Y)
         canvas.drawText("进度", text2X, text2Y, textPaint)
         canvas.rotate(90f, text2X, text2Y)
@@ -133,7 +149,7 @@ class CurveView : View {
 
         //画底线
         curvePaint.color = Color.argb(85, 0, 0, 0)
-        canvas.drawLine(0f, heightSize.toFloat(), widthSize.toFloat(), 0f, curvePaint)
+        canvas.drawLine(lbX,lbY, rtX, rtY, curvePaint)
 
         if (interpolator != null) {
             //画具体的曲线
@@ -143,15 +159,18 @@ class CurveView : View {
                 val x = idx.toFloat()
                 val y = interpolator!!.getInterpolation(idx.toFloat() / widthSize) * heightSize
 
-                if (idx==0)
-                    path.moveTo(x, heightSize - y)
+                if (idx == 0)
+                    path.moveTo(x+paddingGap, heightSize - y+paddingGap)
                 else
-                    path.lineTo(x, heightSize - y)
-                Log.e("pmm", "x=$x y=$y")
+                    path.lineTo(x+paddingGap, heightSize - y+paddingGap)
+                //Log.e("pmm", "x=$x y=$y")
             }
-            canvas.drawPath(path, curvePaint);
+            canvas.drawPath(path, curvePaint)
         }
 
+        //起点和结束点画圆
+        canvas.drawCircle(lbX,lbY,dip2px(2f).toFloat(),curvePaint)
+        canvas.drawCircle(rtX,rtY,dip2px(2f).toFloat(),curvePaint)
 
     }
 
