@@ -70,8 +70,7 @@ class CurveView : View {
         context,
         attrs,
         defStyle
-    ) {
-    }
+    )
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -87,11 +86,12 @@ class CurveView : View {
 
     //处理高度宽度问题
     private fun resolveWidthHeight(w: Int, h: Int) {
-        widthSize = w - padding * 2
+        val minWidth = min(w, h)
+        widthSize = minWidth - padding * 2
         widthFactor = widthSize / 5
-        heightSize = h - padding * 2
+        heightSize = minWidth - padding * 2
         heightFactor = heightSize / 5
-        setMeasuredDimension(min(widthSize, heightSize), min(widthSize, heightSize))
+        setMeasuredDimension(minWidth, minWidth)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -128,20 +128,37 @@ class CurveView : View {
         for (idx in 1 until 5) {
             val curX = widthFactor * idx
             //竖线
-            canvas.drawLine(paddingGap+curX.toFloat(), paddingGap, paddingGap+curX.toFloat(), paddingGap+heightSize.toFloat(), borderPaint)
+            canvas.drawLine(
+                paddingGap + curX.toFloat(),
+                paddingGap,
+                paddingGap + curX.toFloat(),
+                paddingGap + heightSize.toFloat(),
+                borderPaint
+            )
 
             val curY = heightFactor * idx
             //横线
-            canvas.drawLine(paddingGap, paddingGap+curY.toFloat(), paddingGap+widthSize.toFloat(), paddingGap+curY.toFloat(), borderPaint)
+            canvas.drawLine(
+                paddingGap,
+                paddingGap + curY.toFloat(),
+                paddingGap + widthSize.toFloat(),
+                paddingGap + curY.toFloat(),
+                borderPaint
+            )
         }
 
         //画字
         textPaint.textAlign = Paint.Align.RIGHT
-        canvas.drawText("时间", paddingGap+widthSize.toFloat(), paddingGap+heightSize.toFloat() - dip2px(8f), textPaint)
+        canvas.drawText(
+            "时间",
+            paddingGap + widthSize.toFloat(),
+            paddingGap + heightSize.toFloat() - dip2px(8f),
+            textPaint
+        )
 
         textPaint.textAlign = Paint.Align.LEFT
-        val text2X = paddingGap+dip2px(16f).toFloat()
-        val text2Y = paddingGap+dip2px(32f).toFloat()
+        val text2X = paddingGap + dip2px(16f).toFloat()
+        val text2Y = paddingGap + dip2px(32f).toFloat()
         canvas.rotate(-90f, text2X, text2Y)
         canvas.drawText("进度", text2X, text2Y, textPaint)
         canvas.rotate(90f, text2X, text2Y)
@@ -149,7 +166,7 @@ class CurveView : View {
 
         //画底线
         curvePaint.color = Color.argb(85, 0, 0, 0)
-        canvas.drawLine(lbX,lbY, rtX, rtY, curvePaint)
+        canvas.drawLine(lbX, lbY, rtX, rtY, curvePaint)
 
         if (interpolator != null) {
             //画具体的曲线
@@ -160,17 +177,17 @@ class CurveView : View {
                 val y = interpolator!!.getInterpolation(idx.toFloat() / widthSize) * heightSize
 
                 if (idx == 0)
-                    path.moveTo(x+paddingGap, heightSize - y+paddingGap)
+                    path.moveTo(x + paddingGap, heightSize - y + paddingGap)
                 else
-                    path.lineTo(x+paddingGap, heightSize - y+paddingGap)
+                    path.lineTo(x + paddingGap, heightSize - y + paddingGap)
                 //Log.e("pmm", "x=$x y=$y")
             }
             canvas.drawPath(path, curvePaint)
         }
 
         //起点和结束点画圆
-        canvas.drawCircle(lbX,lbY,dip2px(2f).toFloat(),curvePaint)
-        canvas.drawCircle(rtX,rtY,dip2px(2f).toFloat(),curvePaint)
+        canvas.drawCircle(lbX, lbY, dip2px(2f).toFloat(), curvePaint)
+        canvas.drawCircle(rtX, rtY, dip2px(2f).toFloat(), curvePaint)
 
     }
 
