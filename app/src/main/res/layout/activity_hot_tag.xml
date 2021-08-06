@@ -17,11 +17,11 @@
         android:id="@+id/hotTag"
         android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:layout_alignLeft="@+id/view1"
-        android:layout_alignTop="@+id/view1"
-        app:position="bottomLeft"
+        android:layout_alignEnd="@+id/view1"
+        android:layout_alignBottom="@+id/view1"
+        app:position="bottomRight"
         app:tagBgColor="#FB6A3B"
-        app:tagText="已兑换哈"
+        app:tagText="已兑换"
         app:tagTextColor="#ffffff"
         app:triangle="false" />
 </RelativeLayout>
