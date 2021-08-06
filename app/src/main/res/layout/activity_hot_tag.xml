@@ -19,10 +19,9 @@
         android:layout_height="match_parent"
         android:layout_alignLeft="@+id/view1"
         android:layout_alignTop="@+id/view1"
+        app:position="bottomLeft"
         app:tagBgColor="#FB6A3B"
-        app:tagText="热卖标签"
+        app:tagText="已兑换哈"
         app:tagTextColor="#ffffff"
-        app:position="left"
-        app:triangle="false"
-        />
+        app:triangle="false" />
 </RelativeLayout>
