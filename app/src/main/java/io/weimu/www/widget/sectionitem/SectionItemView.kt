@@ -19,7 +19,11 @@ import io.weimu.www.R
  * Date:2018/9/27 14:44
  * Description:key-value的输入视图
  */
-class SectionItemView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayoutCompat(context, attrs, defStyleAttr) {
+class SectionItemView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     private var etValue: EditText? = null
     private var tvValue: TextView? = null
@@ -63,7 +67,8 @@ class SectionItemView @JvmOverloads constructor(context: Context, attrs: Attribu
 
     private fun init(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
         //attrs
-        val a = getContext().obtainStyledAttributes(attrs, R.styleable.SectionItemView, defStyleAttr, 0)
+        val a =
+            getContext().obtainStyledAttributes(attrs, R.styleable.SectionItemView, defStyleAttr, 0)
         var key = a.getString(R.styleable.SectionItemView_wm_key)
         if (TextUtils.isEmpty(key)) key = "这是Key："
         var hint = a.getString(R.styleable.SectionItemView_wm_hint)
@@ -81,14 +86,20 @@ class SectionItemView @JvmOverloads constructor(context: Context, attrs: Attribu
         //linearLayout
         val linearLayout = LinearLayoutCompat(getContext())
         //linearLayout.setBackgroundResource(R.drawable.bg_trade_pwd);
-        linearLayout.layoutParams = LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, dip2px(52f))
+        linearLayout.layoutParams = LinearLayoutCompat.LayoutParams(
+            LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+            dip2px(52f)
+        )
         linearLayout.gravity = Gravity.CENTER_VERTICAL
         linearLayout.orientation = LinearLayoutCompat.HORIZONTAL
         linearLayout.setPadding(dip2px(10f), 0, dip2px(15f), 0)
 
         //是否为必填的视图
         val tvImport = TextView(getContext())
-        val tvImportParams = LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        val tvImportParams = LinearLayoutCompat.LayoutParams(
+            LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
         tvImportParams.setMargins(0, 0, dip2px(2f), 0)
         tvImport.layoutParams = tvImportParams
         tvImport.text = "*"
@@ -105,7 +116,10 @@ class SectionItemView @JvmOverloads constructor(context: Context, attrs: Attribu
 
         //key
         val tvKey = TextView(getContext())
-        tvKey.layoutParams = LinearLayoutCompat.LayoutParams(dip2px(80f), LinearLayoutCompat.LayoutParams.MATCH_PARENT)
+        tvKey.layoutParams = LinearLayoutCompat.LayoutParams(
+            dip2px(80f),
+            LinearLayoutCompat.LayoutParams.MATCH_PARENT
+        )
         tvKey.text = key
         tvKey.gravity = Gravity.CENTER_VERTICAL
         tvKey.setTextColor(Color.rgb(57, 57, 57))
@@ -115,7 +129,11 @@ class SectionItemView @JvmOverloads constructor(context: Context, attrs: Attribu
         //value
         if (canInput) {
             etValue = EditText(getContext())
-            etValue?.layoutParams = LinearLayoutCompat.LayoutParams(0, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 1.0f)
+            etValue?.layoutParams = LinearLayoutCompat.LayoutParams(
+                0,
+                LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+                1.0f
+            )
             etValue?.setText(content)
             etValue?.hint = hint
             etValue?.background = null
@@ -127,12 +145,17 @@ class SectionItemView @JvmOverloads constructor(context: Context, attrs: Attribu
 
             when (inputType) {
                 1//密码
-                -> etValue?.inputType = EditorInfo.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_VARIATION_PASSWORD
+                -> etValue?.inputType =
+                    EditorInfo.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_VARIATION_PASSWORD
             }
             linearLayout.addView(etValue)
         } else {
             tvValue = TextView(getContext())
-            tvValue?.layoutParams = LinearLayoutCompat.LayoutParams(0, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 1.0f)
+            tvValue?.layoutParams = LinearLayoutCompat.LayoutParams(
+                0,
+                LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+                1.0f
+            )
             tvValue?.setText(content)
             tvValue?.hint = hint
             tvValue?.background = null
@@ -144,7 +167,8 @@ class SectionItemView @JvmOverloads constructor(context: Context, attrs: Attribu
 
             when (inputType) {
                 1//密码
-                -> tvValue?.inputType = EditorInfo.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_VARIATION_PASSWORD
+                -> tvValue?.inputType =
+                    EditorInfo.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_VARIATION_PASSWORD
             }
             linearLayout.addView(tvValue)
         }
@@ -153,7 +177,10 @@ class SectionItemView @JvmOverloads constructor(context: Context, attrs: Attribu
         //ImageView
         val ivArrow = ImageView(getContext())
         ivArrow.setImageResource(R.drawable.universal_item_more_black)
-        ivArrow.layoutParams = LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.WRAP_CONTENT, LinearLayoutCompat.LayoutParams.MATCH_PARENT)
+        ivArrow.layoutParams = LinearLayoutCompat.LayoutParams(
+            LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
+            LinearLayoutCompat.LayoutParams.MATCH_PARENT
+        )
         if (showArrow) linearLayout.addView(ivArrow)
 
 
@@ -161,7 +188,10 @@ class SectionItemView @JvmOverloads constructor(context: Context, attrs: Attribu
         addView(linearLayout)
 
         val divider = View(getContext())
-        val dividerParams = LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, dip2px(1f))
+        val dividerParams = LinearLayoutCompat.LayoutParams(
+            LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+            dip2px(1f)
+        )
         dividerParams.setMargins(dip2px(20f), 0, 0, 0)
         divider.layoutParams = dividerParams
         divider.setBackgroundColor(0x26000000)
